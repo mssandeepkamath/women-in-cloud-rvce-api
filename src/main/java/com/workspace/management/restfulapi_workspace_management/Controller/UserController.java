@@ -9,16 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @RestController
-public class ProjectController {
+public class UserController {
 
 
-    @GetMapping(path = "/testProjectEndPoint",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> testProjectEndPoint() {
-        return new ResponseEntity<>("API Responding",HttpStatus.CREATED);
-    }
 
-
+//Get list of all projects
     @GetMapping(path = "/projects",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Projects>> getProjects() {
         List<Projects> projects = new ArrayList<>();

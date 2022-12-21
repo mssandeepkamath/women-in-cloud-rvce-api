@@ -1,3 +1,3 @@
-Project Controller Endpoints:
+User Endpoints:
 
 base_url/allProjects
