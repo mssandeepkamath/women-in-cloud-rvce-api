@@ -1,1 +1,3 @@
-List of end points and their actions will go here.
+Project Controller Endpoints:
+
+base_url/allProjects
