@@ -15,7 +15,7 @@ public class UserController {
 
 
 
-//Get the list of all projects
+//Get list of all projects
     @GetMapping(path = "/projects",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Projects>> getProjects() {
         List<Projects> projects = new ArrayList<>();
