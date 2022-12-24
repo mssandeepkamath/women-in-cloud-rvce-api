@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
-
+//just checking
     @GetMapping(path = "/projects",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Project>> getProjects() {
         List<Project> projects = new ArrayList<>();
