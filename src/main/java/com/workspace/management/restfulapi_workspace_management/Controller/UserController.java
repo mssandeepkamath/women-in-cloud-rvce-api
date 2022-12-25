@@ -15,7 +15,13 @@ public class UserController {
     @GetMapping(path = "/projects",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Project>> getProjects() {
         List<Project> projects = new ArrayList<>();
-
+        Project p1=new Project();
+        Project p2=new Project();
+        p1.setId(1);
+        p2.setId(2);
+        p1.setDes("iaas");
+        p2.setDes("ffdd");
+        p1.
         return new ResponseEntity<>(projects, HttpStatus.ACCEPTED);
     }
     @GetMapping(path = "/internships",produces = MediaType.APPLICATION_JSON_VALUE)
