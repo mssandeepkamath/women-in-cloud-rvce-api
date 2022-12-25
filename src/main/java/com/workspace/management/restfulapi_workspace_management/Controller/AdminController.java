@@ -4,10 +4,7 @@ import com.workspace.management.restfulapi_workspace_management.Entity.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +12,32 @@ import java.util.List;
 @RestController
 public class AdminController {
 
-    @GetMapping(path="/project-applied-students",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Student>> getProjectAppliedStudent()
+    @GetMapping(path="/project-applied-students/{projectId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> getProjectAppliedStudent(@PathVariable String projectId)
     {
         List<Student>students=new ArrayList<Student>();
 
         return new ResponseEntity<List<Student>>(students, HttpStatus.OK);
     }
 
-    @GetMapping(path="/internship-applied-students",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Student>> getInternshipAppliedStudent()
+    @GetMapping(path="/internship-applied-students/{internshipId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> getInternshipAppliedStudent(@PathVariable String internshipId)
+    {
+        List<Student>students=new ArrayList<Student>();
+
+        return new ResponseEntity<List<Student>>(students, HttpStatus.OK);
+    }
+
+    @GetMapping(path="/seminar-applied-students/{seminarId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> getSeminarAppliedStudent(@PathVariable String seminarId)
+    {
+        List<Student>students=new ArrayList<Student>();
+
+        return new ResponseEntity<List<Student>>(students, HttpStatus.OK);
+    }
+
+    @GetMapping(path="/workshop-applied-students/{workshopId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> getWorkshopAppliedStudent(@PathVariable String workshopId)
     {
         List<Student>students=new ArrayList<Student>();
 
