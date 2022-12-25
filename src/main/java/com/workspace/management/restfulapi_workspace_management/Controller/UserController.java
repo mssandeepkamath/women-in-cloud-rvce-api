@@ -15,41 +15,34 @@ public class UserController {
     @GetMapping(path = "/projects",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Project>> getProjects() {
         List<Project> projects = new ArrayList<>();
-        Project p1=new Project();
-        Project p2=new Project();
-        p1.setId(1);
-        p2.setId(2);
-        p1.setDes("iaas");
-        p2.setDes("ffdd");
-        p1.
-        return new ResponseEntity<>(projects, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
     }
     @GetMapping(path = "/internships",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Internship>> getInternships() {
         List<Internship> internships = new ArrayList<>();
 
-        return new ResponseEntity<>(internships, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(internships, HttpStatus.OK);
     }
 
     @GetMapping(path = "/seminars",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Seminar>> getSeminars() {
         List<Seminar> seminars = new ArrayList<>();
 
-        return new ResponseEntity<>(seminars, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(seminars, HttpStatus.OK);
     }
 
     @GetMapping(path = "/workshops",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Workshop>> getWorkshops() {
         List<Workshop> workshops = new ArrayList<>();
 
-        return new ResponseEntity<>(workshops, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(workshops, HttpStatus.OK);
     }
 
     @GetMapping(path = "/student-chapter",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentChapter>> getStudentChapter() {
         List<StudentChapter> studentsChapters = new ArrayList<>();
 
-        return new ResponseEntity<>(studentsChapters, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(studentsChapters, HttpStatus.OK);
     }
 
 
