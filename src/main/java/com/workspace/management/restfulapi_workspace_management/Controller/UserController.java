@@ -15,7 +15,6 @@ public class UserController {
     @GetMapping(path = "/projects",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Project>> getProjects() {
         List<Project> projects = new ArrayList<>();
-
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
     @GetMapping(path = "/internships",produces = MediaType.APPLICATION_JSON_VALUE)
