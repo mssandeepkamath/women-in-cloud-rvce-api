@@ -11,39 +11,38 @@ import java.util.List;
 
 @RestController
 public class UserController {
-//just checking
+
     @GetMapping(path = "/projects",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Project>> getProjects() {
         List<Project> projects = new ArrayList<>();
-
-        return new ResponseEntity<>(projects, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
     }
     @GetMapping(path = "/internships",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Internship>> getInternships() {
         List<Internship> internships = new ArrayList<>();
 
-        return new ResponseEntity<>(internships, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(internships, HttpStatus.OK);
     }
 
     @GetMapping(path = "/seminars",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Seminar>> getSeminars() {
         List<Seminar> seminars = new ArrayList<>();
 
-        return new ResponseEntity<>(seminars, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(seminars, HttpStatus.OK);
     }
 
     @GetMapping(path = "/workshops",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Workshop>> getWorkshops() {
         List<Workshop> workshops = new ArrayList<>();
 
-        return new ResponseEntity<>(workshops, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(workshops, HttpStatus.OK);
     }
 
     @GetMapping(path = "/student-chapter",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentChapter>> getStudentChapter() {
         List<StudentChapter> studentsChapters = new ArrayList<>();
 
-        return new ResponseEntity<>(studentsChapters, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(studentsChapters, HttpStatus.OK);
     }
 
 
