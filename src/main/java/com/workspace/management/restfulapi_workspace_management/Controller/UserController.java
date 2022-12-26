@@ -24,18 +24,11 @@ public class UserController {
         return new ResponseEntity<>(internships, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/seminars",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Seminar>> getSeminars() {
-        List<Seminar> seminars = new ArrayList<>();
+    @GetMapping(path = "/events",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Event>> getEvents() {
+        List<Event> events = new ArrayList<>();
 
-        return new ResponseEntity<>(seminars, HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/workshops",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Workshop>> getWorkshops() {
-        List<Workshop> workshops = new ArrayList<>();
-
-        return new ResponseEntity<>(workshops, HttpStatus.OK);
+        return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
     @GetMapping(path = "/student-chapter",produces = MediaType.APPLICATION_JSON_VALUE)

@@ -3,18 +3,38 @@ package com.workspace.management.restfulapi_workspace_management.Entity;
 import java.util.Date;
 
 public class Internship {
-    int internship_id;
-    String company_name;
-    String role_description;
-    String requirements;
-    String manager;
-    Date start_date=new Date();
-    Date end_date=new Date();
+    private int internship_id;
+    private String company_name;
 
- //   String Duration;//derived it is
+
+    private String role_description;
+    private String requirements;
+    private String manager;
+    private Date start_date = new Date();
+    private Date end_date = new Date();
+
+    //   String Duration;//derived it is
     String mode;//online or offline
     String location; //applied only if offline
     String type;//wts this?
+
+    public Internship() {
+        super();
+    }
+
+    public Internship(int internship_id, String company_name, String role_description, String requirements, String manager, Date start_date, Date end_date, String mode, String location, String type) {
+       super();
+        this.internship_id = internship_id;
+        this.company_name = company_name;
+        this.role_description = role_description;
+        this.requirements = requirements;
+        this.manager = manager;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.mode = mode;
+        this.location = location;
+        this.type = type;
+    }
 
     public int getInternship_id() {
         return internship_id;
@@ -94,5 +114,20 @@ public class Internship {
 
     public void setType(String type) {
         this.type = type;
+    }
+    @Override
+    public String toString() {
+        return "Internship{" +
+                "internship_id=" + internship_id +
+                ", company_name='" + company_name + '\'' +
+                ", role_description='" + role_description + '\'' +
+                ", requirements='" + requirements + '\'' +
+                ", manager='" + manager + '\'' +
+                ", start_date=" + start_date +
+                ", end_date=" + end_date +
+                ", mode='" + mode + '\'' +
+                ", location='" + location + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }
