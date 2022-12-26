@@ -1,12 +1,14 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.Date;
 
+@Entity
 public class Internship {
     private int internship_id;
     private String company_name;
-
-
     private String role_description;
     private String requirements;
     private String manager;
@@ -36,6 +38,7 @@ public class Internship {
         this.type = type;
     }
 
+@Id
     public int getInternship_id() {
         return internship_id;
     }
@@ -130,4 +133,5 @@ public class Internship {
                 ", type='" + type + '\'' +
                 '}';
     }
+
 }

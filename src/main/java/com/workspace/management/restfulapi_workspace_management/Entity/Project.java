@@ -1,7 +1,11 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.Date;
 
+@Entity
 public class Project {
     private int project_id;
     private String company_name;
@@ -30,7 +34,7 @@ public class Project {
         this.opening = opening;
         this.resources = resources;
     }
-
+@Id
     public int getProject_id() {
         return project_id;
     }
@@ -102,7 +106,6 @@ public class Project {
     public void setResources(String resources) {
         this.resources = resources;
     }
-
     @Override
     public String toString() {
         return "Project{" +

@@ -4,7 +4,6 @@ import com.workspace.management.restfulapi_workspace_management.Entity.StudentCh
 import java.util.List;
 
 public interface StudentChapterService {
-
-    public List<StudentChapter> getStudentChapter();
+    List<StudentChapter> getStudentChapter();
 
 }

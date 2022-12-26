@@ -1,5 +1,10 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Student {
     private String student_first_name;
     private String student_mid_name;
@@ -58,6 +63,7 @@ public class Student {
         this.batch = batch;
     }
 
+    @Id
     public String getUSN() {
         return USN;
     }

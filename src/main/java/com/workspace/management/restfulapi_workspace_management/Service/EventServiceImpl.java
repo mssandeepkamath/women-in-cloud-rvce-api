@@ -2,9 +2,11 @@ package com.workspace.management.restfulapi_workspace_management.Service;
 
 import com.workspace.management.restfulapi_workspace_management.Entity.Event;
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class EventServiceImpl implements EventService {
 
     @Override
@@ -18,7 +20,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void addEvent(int event_id) {
-
+    public void addEvent(Event event) {
     }
+
 }

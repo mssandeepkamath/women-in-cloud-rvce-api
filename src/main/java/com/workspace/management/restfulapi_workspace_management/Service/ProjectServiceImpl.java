@@ -2,9 +2,12 @@ package com.workspace.management.restfulapi_workspace_management.Service;
 
 import com.workspace.management.restfulapi_workspace_management.Entity.Project;
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+@Service
 public class ProjectServiceImpl implements ProjectService {
 
     @Override
@@ -18,7 +21,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void addProject(int project_id) {
-
+    public void addProject(Project project) {
     }
+
 }

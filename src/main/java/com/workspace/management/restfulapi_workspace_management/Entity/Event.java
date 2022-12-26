@@ -1,7 +1,12 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.Date;
 
+
+@Entity
 public class Event {
 
     private int event_id;
@@ -24,6 +29,7 @@ public class Event {
         this.type = type;
     }
 
+@Id
     public int getEvent_id() {
         return event_id;
     }

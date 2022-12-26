@@ -1,5 +1,8 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
+import jakarta.persistence.Entity;
+
+
 public class StudentChapter {
     private String president;
     private String vice_President;
