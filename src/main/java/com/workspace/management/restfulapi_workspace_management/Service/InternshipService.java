@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface InternshipService {
 
-    public List<Internship> getInternships();
+    List<Internship> getInternships();
 
-    public List<Student> getInternshipAppliedStudent(int internship_id);
+    List<Student> getInternshipAppliedStudent(int internship_id);
 
-    public void addInternship(int internship_id);
+    void addInternship(Internship internship);
 
 }

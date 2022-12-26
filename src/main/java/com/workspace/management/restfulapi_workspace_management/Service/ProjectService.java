@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface ProjectService {
 
-    public List<Project> getProjects();
+    List<Project> getProjects();
 
-    public List<Student> getProjectAppliedStudent(int project_id);
+    List<Student> getProjectAppliedStudent(int project_id);
 
-    public void addProject(int project_id);
+    void addProject(Project project);
 
 }

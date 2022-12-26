@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface EventService {
 
-    public List<Event> getEvents();
+    List<Event> getEvents();
 
-    public List<Student> getEventAppliedStudent(int event_id);
+    List<Student> getEventAppliedStudent(int event_id);
 
-    public void addEvent(int event_id);
+    void addEvent(Event event);
 
 }
