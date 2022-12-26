@@ -16,7 +16,7 @@ public class Internship {
     //   String Duration;//derived it is
     String mode;//online or offline
     String location; //applied only if offline
-    String type;//wts this?
+    String type;//paid/not paid
 
     public Internship() {
         super();
