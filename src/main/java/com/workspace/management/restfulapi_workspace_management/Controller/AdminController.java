@@ -12,32 +12,24 @@ import java.util.List;
 @RestController
 public class AdminController {
 
-    @GetMapping(path="/project-applied-students/{projectId}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Student>> getProjectAppliedStudent(@PathVariable String projectId)
+    @GetMapping(path="/project-applied-students/{project_id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> getProjectAppliedStudent(@PathVariable String project_id)
     {
         List<Student>students=new ArrayList<Student>();
 
         return new ResponseEntity<List<Student>>(students, HttpStatus.OK);
     }
 
-    @GetMapping(path="/internship-applied-students/{internshipId}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Student>> getInternshipAppliedStudent(@PathVariable String internshipId)
+    @GetMapping(path="/internship-applied-students/{internship_id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> getInternshipAppliedStudent(@PathVariable String internship_id)
     {
         List<Student>students=new ArrayList<Student>();
 
         return new ResponseEntity<List<Student>>(students, HttpStatus.OK);
     }
 
-    @GetMapping(path="/seminar-applied-students/{seminarId}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Student>> getSeminarAppliedStudent(@PathVariable String seminarId)
-    {
-        List<Student>students=new ArrayList<Student>();
-
-        return new ResponseEntity<List<Student>>(students, HttpStatus.OK);
-    }
-
-    @GetMapping(path="/workshop-applied-students/{workshopId}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Student>> getWorkshopAppliedStudent(@PathVariable String workshopId)
+    @GetMapping(path="/event-applied-students/{event_id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> getEventAppliedStudent(@PathVariable String event_id)
     {
         List<Student>students=new ArrayList<Student>();
 
@@ -58,17 +50,12 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(path="/add-seminar",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> addSeminar(@RequestBody Seminar seminar)
+    @PostMapping(path="/add-events",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HttpStatus> addEvent(@RequestBody Event seminar)
     {
         //return based on acceptance
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(path="/add-workshop",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> addWorkshop(@RequestBody Workshop workshop)
-    {
-        //return based on acceptance
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+
 }
