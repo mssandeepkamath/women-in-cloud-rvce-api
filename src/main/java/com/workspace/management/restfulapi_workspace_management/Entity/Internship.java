@@ -1,24 +1,43 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
 public class Internship {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int internship_id;
+
+
+    @Column(nullable = false)
     private String company_name;
+
+    @Column(nullable = false)
     private String role_description;
+
+    @Column(nullable = false)
     private String requirements;
+
+    @Column(nullable = false)
     private String manager;
+
+
+    @Column(nullable = false)
     private Date start_date = new Date();
     private Date end_date = new Date();
 
     //   String Duration;//derived it is
+
+    @Column(nullable = false)
     String mode;//online or offline
+
+    @Column(nullable = false)
     String location; //applied only if offline
-    String type;//wts this?
+
+    String type;
 
     public Internship() {
         super();
@@ -38,7 +57,6 @@ public class Internship {
         this.type = type;
     }
 
-@Id
     public int getInternship_id() {
         return internship_id;
     }

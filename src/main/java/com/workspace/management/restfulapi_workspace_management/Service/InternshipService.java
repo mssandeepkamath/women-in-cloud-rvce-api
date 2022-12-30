@@ -1,16 +1,19 @@
 package com.workspace.management.restfulapi_workspace_management.Service;
 
+import com.workspace.management.restfulapi_workspace_management.Entity.Event;
 import com.workspace.management.restfulapi_workspace_management.Entity.Internship;
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface InternshipService {
 
-    List<Internship> getInternships();
+    ResponseEntity<List<Internship>> getInternships();
 
     List<Student> getInternshipAppliedStudent(int internship_id);
 
-    void addInternship(Internship internship);
+    HttpStatus addInternship(Internship internship);
 
 }
