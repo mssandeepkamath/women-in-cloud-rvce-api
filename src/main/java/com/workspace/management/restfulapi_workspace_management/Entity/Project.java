@@ -1,13 +1,15 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
 @Entity
 public class Project {
     private int project_id;
+
+    @Column(nullable = false)
     private String company_name;
     private String description;
     private String requirements;
@@ -35,6 +37,8 @@ public class Project {
         this.resources = resources;
     }
 @Id
+@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
+@GenericGenerator(name = "native", strategy = "native")
     public int getProject_id() {
         return project_id;
     }

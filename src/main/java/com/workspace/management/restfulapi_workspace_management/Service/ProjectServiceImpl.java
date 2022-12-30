@@ -22,7 +22,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> getProjects() {
-        return null;
+      return projectDao.findAll();
     }
 
     @Override
@@ -31,7 +31,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void addProject(Project project) {
+    public void addProject(Project project) throws Exception {
+        projectDao.save(project);
     }
 
 }
