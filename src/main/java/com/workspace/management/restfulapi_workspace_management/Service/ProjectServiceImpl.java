@@ -6,6 +6,8 @@ import com.workspace.management.restfulapi_workspace_management.Dao.StudentDao;
 import com.workspace.management.restfulapi_workspace_management.Entity.Project;
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,12 @@ public class ProjectServiceImpl implements ProjectService {
     private StudentDao studentDao;
 
     @Override
-    public List<Project> getProjects() {
-      return projectDao.findAll();
+    public ResponseEntity<List<Project>> getProjects() {
+        try {
+            return new ResponseEntity<>(projectDao.findAll(),HttpStatus.OK) ;
+        } catch (Exception e) {
+            return new ResponseEntity<>(null,HttpStatus.OK) ;
+        }
     }
 
     @Override
@@ -31,8 +37,17 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void addProject(Project project) throws Exception {
-        projectDao.save(project);
+    public HttpStatus addProject(Project project){
+
+        try
+        {
+            projectDao.save(project);
+            return HttpStatus.OK;
+        }
+        catch(Exception e)
+        {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
     }
 
 }

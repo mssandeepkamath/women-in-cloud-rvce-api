@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 public class UserController {
-
     @Autowired
     private ProjectService projectService;
     @Autowired
@@ -26,26 +25,21 @@ public class UserController {
 
     @GetMapping(path = "/projects",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Project>> getProjects() {
-        List<Project> projects=this.projectService.getProjects();
-        return new ResponseEntity<>(projects, HttpStatus.OK);
+        return this.projectService.getProjects();
     }
     @GetMapping(path = "/internships",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Internship>> getInternships() {
-        List<Internship> internships=this.internshipService.getInternships();
-        return new ResponseEntity<>(internships, HttpStatus.OK);
+        return this.internshipService.getInternships();
     }
 
     @GetMapping(path = "/events",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Event>> getEvents() {
-        List<Event> events=this.eventService.getEvents();
-        return new ResponseEntity<>(events, HttpStatus.OK);
+        return this.eventService.getEvents();
     }
 
     @GetMapping(path = "/student-chapter",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentChapter>> getStudentChapter() {
-        List<StudentChapter> studentsChapters = this.studentChapterService.getStudentChapter();
-        return new ResponseEntity<>(studentsChapters, HttpStatus.OK);
+        return new ResponseEntity<>(this.studentChapterService.getStudentChapter(), HttpStatus.OK);
     }
-
 
 }

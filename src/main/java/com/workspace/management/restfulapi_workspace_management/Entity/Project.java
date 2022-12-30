@@ -1,23 +1,40 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
 @Entity
 public class Project {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int project_id;
 
     @Column(nullable = false)
     private String company_name;
+
+
+    @Column(nullable = false)
     private String description;
+
+
+    @Column(nullable = false)
     private String requirements;
+
+
+    @Column(nullable = false)
+
     private String manager;
+
+    @Column(nullable = false)
     private Date start_date = new Date();
     private Date end_date = new Date();
-    private int opening; //depicts number of openings in the project
-    //  String Duration; //derived
+
+    @Column(nullable = false)
+    private int opening;
     private String resources;
 
     public Project() {
@@ -36,9 +53,6 @@ public class Project {
         this.opening = opening;
         this.resources = resources;
     }
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
-@GenericGenerator(name = "native", strategy = "native")
     public int getProject_id() {
         return project_id;
     }
@@ -54,6 +68,8 @@ public class Project {
     public void setCompany_name(String company_name) {
         this.company_name = company_name;
     }
+
+
 
     public String getDescription() {
         return description;

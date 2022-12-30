@@ -1,7 +1,6 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -9,11 +8,25 @@ import java.util.Date;
 @Entity
 public class Event {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int event_id;
+
+
+    @Column(nullable = false)
     private Date start_date=new Date();
+
+    @Column(nullable = false)
     private Date end_date=new Date();
+
+    @Column(nullable = false)
     private String staff_incharge;
+
+    @Column(nullable = false)
     private String location;
+
+    @Column(nullable = false)
     private String type;
 
     public Event() {
@@ -29,7 +42,7 @@ public class Event {
         this.type = type;
     }
 
-@Id
+
     public int getEvent_id() {
         return event_id;
     }
