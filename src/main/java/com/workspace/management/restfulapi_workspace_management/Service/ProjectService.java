@@ -12,6 +12,6 @@ public interface ProjectService {
 
     List<Student> getProjectAppliedStudent(int project_id);
 
-    void addProject(Project project);
+    void addProject(Project project) throws Exception;
 
 }
