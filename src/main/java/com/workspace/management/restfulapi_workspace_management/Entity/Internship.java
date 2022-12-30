@@ -37,7 +37,7 @@ public class Internship {
     @Column(nullable = false)
     String location; //applied only if offline
 
-    String type;
+    String type;//paid/not paid
 
     public Internship() {
         super();
