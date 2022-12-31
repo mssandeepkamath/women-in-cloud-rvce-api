@@ -35,13 +35,7 @@ public class Project {
     @Column(nullable = false, name = "start_date")
     private Date start_date = new Date();
 
-    public Set<Student> getStudents() {
-        return students;
-    }
 
-    public void setStudents(Set<Student> students) {
-        this.students = students;
-    }
 
     @Column( name = "end_date")
     private Date end_date = new Date();
@@ -53,8 +47,16 @@ public class Project {
     private String resources;
 
     @JsonIgnore
-    @ManyToMany(mappedBy="projects")
-    private Set<Student> students;
+    @ManyToMany(mappedBy="applied_projects")
+    private Set<Student> applied_students;
+
+    public Set<Student> getApplied_students() {
+        return applied_students;
+    }
+
+    public void setApplied_students(Set<Student> applied_students) {
+        this.applied_students = applied_students;
+    }
 
     public Project() {
         super();

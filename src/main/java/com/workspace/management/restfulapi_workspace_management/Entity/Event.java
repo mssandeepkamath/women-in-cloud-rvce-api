@@ -33,15 +33,15 @@ public class Event {
     @Column(nullable = false, name = "type")
     private String type;
     @JsonIgnore
-    @ManyToMany(mappedBy = "events")
-    private Set<Student> students;
+    @ManyToMany(mappedBy = "applied_events")
+    private Set<Student> applied_students;
 
-    public Set<Student> getStudents() {
-        return students;
+    public Set<Student> getApplied_students() {
+        return applied_students;
     }
 
-    public void setStudents(Set<Student> students) {
-        this.students = students;
+    public void setApplied_students(Set<Student> applied_students) {
+        this.applied_students = applied_students;
     }
 
     public Event() {

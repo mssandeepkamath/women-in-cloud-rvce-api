@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
+
 
 @RestController
 public class AdminController {
@@ -18,6 +20,7 @@ public class AdminController {
     InternshipService internshipService;
     @Autowired
     EventService eventService;
+
 
 
     @GetMapping(path = "/project-applied-students/{project_id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,11 +47,16 @@ public class AdminController {
     public ResponseEntity<HttpStatus> addInternship(@RequestBody Internship internship) {
             return new ResponseEntity<>( this.internshipService.addInternship(internship));
     }
-
     @PostMapping(path = "/add-event", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpStatus> addEvent(@RequestBody Event event) {
             return new ResponseEntity<>(this.eventService.addEvent(event));
     }
-
-
+    @PostMapping(path = "/hire-project",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HttpStatus> hireProject(@RequestBody Map<String,String> json) {
+        return new ResponseEntity<>(projectService.hireProject(json.get("USN"), Integer.parseInt(json.get("project_id"))));
+    }
+    @PostMapping(path = "/hire-internship",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HttpStatus> hireInternship(@RequestBody Map<String,String> json) {
+        return new ResponseEntity<>(internshipService.hireInternship(json.get("USN"), Integer.parseInt(json.get("internship_id"))));
+    }
 }
