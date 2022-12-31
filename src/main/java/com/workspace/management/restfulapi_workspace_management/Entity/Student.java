@@ -40,36 +40,22 @@ public class Student {
     @JoinTable(name = "project_applied",
             joinColumns = {@JoinColumn(name = "USN")},
             inverseJoinColumns = {@JoinColumn(name = "project_id")})
-    private Set<Project> projects;
+    private Set<Project> applied_projects;
 
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "internship_applied",
             joinColumns = {@JoinColumn(name = "USN")},
             inverseJoinColumns = {@JoinColumn(name = "internship_id")})
-    private Set<Internship> internships;
+    private Set<Internship> applied_internships;
 
-    public Set<Internship> getInternships() {
-        return internships;
-    }
 
-    public void setInternships(Set<Internship> internships) {
-        this.internships = internships;
-    }
-
-    public Set<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(Set<Event> events) {
-        this.events = events;
-    }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "event_applied",
             joinColumns = {@JoinColumn(name = "USN")},
             inverseJoinColumns = {@JoinColumn(name = "event_id")})
-    private Set<Event> events;
+    private Set<Event> applied_events;
 
     public Student() {
         super();
@@ -87,12 +73,28 @@ public class Student {
         this.email_id = email_id;
     }
 
-    public Set<Project> getProjects() {
-        return projects;
+    public Set<Project> getApplied_projects() {
+        return applied_projects;
     }
 
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
+    public void setApplied_projects(Set<Project> applied_projects) {
+        this.applied_projects = applied_projects;
+    }
+
+    public Set<Internship> getApplied_internships() {
+        return applied_internships;
+    }
+
+    public void setApplied_internships(Set<Internship> applied_internships) {
+        this.applied_internships = applied_internships;
+    }
+
+    public Set<Event> getApplied_events() {
+        return applied_events;
+    }
+
+    public void setApplied_events(Set<Event> applied_events) {
+        this.applied_events = applied_events;
     }
 
     public String getStudent_first_name() {

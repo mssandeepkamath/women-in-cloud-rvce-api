@@ -27,6 +27,9 @@ public class InternshipServiceImpl implements InternshipService {
     @Autowired
     private StudentDao studentDao;
 
+    @Autowired
+    EmailSenderService emailSenderService;
+
     @Override
     public ResponseEntity<List<Internship>> getInternships() {
         try {
@@ -38,10 +41,9 @@ public class InternshipServiceImpl implements InternshipService {
 
     @Override
     public List<Student> getInternshipAppliedStudent(int internship_id) {
-        Internship internship=internshipDao.findById(internship_id).orElse(null);
-        if(internship!=null)
-        {
-            return new ArrayList<>(internship.getStudents());
+        Internship internship = internshipDao.findById(internship_id).orElse(null);
+        if (internship != null) {
+            return new ArrayList<>(internship.getApplied_students());
         }
         return null;
     }
@@ -61,10 +63,21 @@ public class InternshipServiceImpl implements InternshipService {
         Internship internship = internshipDao.findById(internship_id).orElse(null);
         Student student = studentDao.findById(USN).orElse(null);
         if (internship != null && student != null) {
-            Set<Internship> internshipSet = student.getInternships();
+            Set<Internship> internshipSet = student.getApplied_internships();
             internshipSet.add(internship);
-            student.setInternships(internshipSet);
+            student.setApplied_internships(internshipSet);
             studentDao.save(student);
+            return HttpStatus.OK;
+        } else
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+    }
+
+    @Override
+    public HttpStatus hireInternship(String USN, int internship_id) {
+        Student student = studentDao.findById(USN).orElse(null);
+        Internship internship = internshipDao.findById(internship_id).orElse(null);
+        if (student != null && internship != null) {
+            emailSenderService.sendSimpleEmail(student.getEmail_id(), "Hi,\nRegarding your application for " + internship.getCompany_name() + ", we have reviewed your resume and found you as a right candidate for the Internship .\nThis is your access token for workspace{access_token}\nThanks and regards,\nCOE admin,\nWIC,\nR V College of Engineering, Bengaluru", "You are HIRED!");
             return HttpStatus.OK;
         } else
             return HttpStatus.INTERNAL_SERVER_ERROR;

@@ -20,5 +20,7 @@ public interface ProjectService {
     HttpStatus applyProject(String USN,int project_id);
 
 
+    HttpStatus hireProject(String USN,int project_id);
+
 
 }

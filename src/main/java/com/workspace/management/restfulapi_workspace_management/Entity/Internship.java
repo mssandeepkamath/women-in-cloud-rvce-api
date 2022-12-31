@@ -46,18 +46,20 @@ public class Internship {
     @Column(name = "type")
     String type;
 
-    public Set<Student> getStudents() {
-        return students;
-    }
 
-    public void setStudents(Set<Student> students) {
-        this.students = students;
-    }
     @JsonIgnore
-    @ManyToMany(mappedBy="internships")
-    private Set<Student> students;
+    @ManyToMany(mappedBy="applied_internships")
+    private Set<Student> applied_students;
     public Internship() {
         super();
+    }
+
+    public Set<Student> getApplied_students() {
+        return applied_students;
+    }
+
+    public void setApplied_students(Set<Student> applied_students) {
+        this.applied_students = applied_students;
     }
 
     public Internship(int internship_id, String company_name, String role_description, String requirements, String manager, Date start_date, Date end_date, String mode, String location, String type) {

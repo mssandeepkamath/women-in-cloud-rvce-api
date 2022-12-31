@@ -18,6 +18,6 @@ public interface InternshipService {
 
     HttpStatus applyInternship(String USN,int internship_id);
 
-
+    HttpStatus hireInternship(String USN,int project_id);
 
 }

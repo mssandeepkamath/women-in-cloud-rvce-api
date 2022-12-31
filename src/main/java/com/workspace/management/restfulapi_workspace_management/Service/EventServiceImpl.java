@@ -39,7 +39,7 @@ public class EventServiceImpl implements EventService {
         Event event=eventDao.findById(event_id).orElse(null);
         if(event!=null)
         {
-            return new ArrayList<>(event.getStudents());
+            return new ArrayList<>(event.getApplied_students());
         }
         return null;
     }
@@ -63,9 +63,9 @@ public class EventServiceImpl implements EventService {
         Student student = studentDao.findById(USN).orElse(null);
 
         if (event != null && student != null) {
-            Set<Event> eventSet = student.getEvents();
+            Set<Event> eventSet = student.getApplied_events();
             eventSet.add(event);
-            student.setEvents(eventSet);
+            student.setApplied_events(eventSet);
             studentDao.save(student);
             return HttpStatus.OK;
         } else
