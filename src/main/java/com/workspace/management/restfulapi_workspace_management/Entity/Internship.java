@@ -1,44 +1,61 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
+@Table(name = "internship")
 public class Internship {
 
     @Id
+    @Column(name = "internship_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int internship_id;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false,name="company_name")
     private String company_name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "role_description")
     private String role_description;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "requirements")
     private String requirements;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "manager")
     private String manager;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false,name="start_date")
     private Date start_date = new Date();
+
+    @Column(name="end_date")
     private Date end_date = new Date();
 
     //   String Duration;//derived it is
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "mode")
     String mode;//online or offline
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "location")
     String location; //applied only if offline
 
-    String type;//paid/not paid
+    @Column(name = "type")
+    String type;
 
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+    @JsonIgnore
+    @ManyToMany(mappedBy="internships")
+    private Set<Student> students;
     public Internship() {
         super();
     }

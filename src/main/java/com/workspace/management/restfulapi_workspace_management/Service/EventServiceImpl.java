@@ -4,6 +4,8 @@ package com.workspace.management.restfulapi_workspace_management.Service;
 import com.workspace.management.restfulapi_workspace_management.Dao.EventDao;
 import com.workspace.management.restfulapi_workspace_management.Dao.StudentDao;
 import com.workspace.management.restfulapi_workspace_management.Entity.Event;
+import com.workspace.management.restfulapi_workspace_management.Entity.Internship;
+import com.workspace.management.restfulapi_workspace_management.Entity.Project;
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -33,6 +36,11 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Student> getEventAppliedStudent(int event_id) {
+        Event event=eventDao.findById(event_id).orElse(null);
+        if(event!=null)
+        {
+            return new ArrayList<>(event.getStudents());
+        }
         return null;
     }
 
@@ -46,6 +54,22 @@ public class EventServiceImpl implements EventService {
             return HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
+    }
+
+    @Override
+    public HttpStatus applyEvent(String USN,int event_id) {
+
+        Event event = eventDao.findById(event_id).orElse(null);
+        Student student = studentDao.findById(USN).orElse(null);
+
+        if (event != null && student != null) {
+            Set<Event> eventSet = student.getEvents();
+            eventSet.add(event);
+            student.setEvents(eventSet);
+            studentDao.save(student);
+            return HttpStatus.OK;
+        } else
+            return HttpStatus.INTERNAL_SERVER_ERROR;
     }
 
 }

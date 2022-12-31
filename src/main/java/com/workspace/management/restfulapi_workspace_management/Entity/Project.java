@@ -1,41 +1,60 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
+@Table(name = "project")
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int project_id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "company_name")
     private String company_name;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "description")
     private String description;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "requirements")
     private String requirements;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "manager")
 
     private String manager;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "start_date")
     private Date start_date = new Date();
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+
+    @Column( name = "end_date")
     private Date end_date = new Date();
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "opening")
     private int opening;
+
+    @Column(name = "resources")
     private String resources;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy="projects")
+    private Set<Student> students;
 
     public Project() {
         super();

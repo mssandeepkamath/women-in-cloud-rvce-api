@@ -1,37 +1,53 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
 
 
 @Entity
+@Table(name = "event")
 public class Event {
 
 
     @Id
+    @Column(name = "event_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int event_id;
 
 
-    @Column(nullable = false)
-    private Date start_date=new Date();
+    @Column(nullable = false, name = "start_date")
+    private Date start_date = new Date();
 
-    @Column(nullable = false)
-    private Date end_date=new Date();
+    @Column(nullable = false, name = "end_date")
+    private Date end_date = new Date();
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "staff_incharge")
     private String staff_incharge;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "location")
     private String location;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "type")
     private String type;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "events")
+    private Set<Student> students;
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
 
     public Event() {
         super();
     }
+
     public Event(int event_id, Date start_date, Date end_date, String staff_incharge, String location, String type) {
         super();
         this.event_id = event_id;

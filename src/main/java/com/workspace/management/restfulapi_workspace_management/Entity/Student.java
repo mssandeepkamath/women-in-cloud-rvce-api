@@ -1,19 +1,75 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
+@Table(name = "student")
 public class Student {
+
+    @Column(name = "student_first_name", nullable = false)
     private String student_first_name;
+
+    @Column(name = "student_mid_name", nullable = true)
     private String student_mid_name;
+
+    @Column(name = "student_last_name", nullable = true)
     private String student_last_name;
+
+    @Column(name = "batch", nullable = false)
     private String batch;
+
+
+    @Id
+    @Column(name = "USN", nullable = false)
     private String USN;//check if something varchar datatype as in sql is avalaible
+
+    @Column(name = "department", nullable = false)
     private String department;
+
+    @Column(name = "phone_number", nullable = false)
     private String phone_number;
+
+    @Column(name = "email_id", nullable = false)
     private String email_id;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "project_applied",
+            joinColumns = {@JoinColumn(name = "USN")},
+            inverseJoinColumns = {@JoinColumn(name = "project_id")})
+    private Set<Project> projects;
+
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "internship_applied",
+            joinColumns = {@JoinColumn(name = "USN")},
+            inverseJoinColumns = {@JoinColumn(name = "internship_id")})
+    private Set<Internship> internships;
+
+    public Set<Internship> getInternships() {
+        return internships;
+    }
+
+    public void setInternships(Set<Internship> internships) {
+        this.internships = internships;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "event_applied",
+            joinColumns = {@JoinColumn(name = "USN")},
+            inverseJoinColumns = {@JoinColumn(name = "event_id")})
+    private Set<Event> events;
 
     public Student() {
         super();
@@ -29,6 +85,14 @@ public class Student {
         this.department = department;
         this.phone_number = ph_number;
         this.email_id = email_id;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 
     public String getStudent_first_name() {
@@ -63,7 +127,6 @@ public class Student {
         this.batch = batch;
     }
 
-    @Id
     public String getUSN() {
         return USN;
     }
@@ -95,6 +158,7 @@ public class Student {
     public void setEmail_id(String email_id) {
         this.email_id = email_id;
     }
+
     @Override
     public String toString() {
         return "Student{" +
