@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -33,6 +35,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Student> getProjectAppliedStudent(int project_id) {
+        Project project=projectDao.findById(project_id).orElse(null);
+        if(project!=null)
+        {
+            return new ArrayList<>(project.getStudents());
+        }
         return null;
     }
 
@@ -49,5 +56,22 @@ public class ProjectServiceImpl implements ProjectService {
             return HttpStatus.INTERNAL_SERVER_ERROR;
         }
     }
+    @Override
+    public HttpStatus applyProject(String USN, int project_id) {
+       Project project=projectDao.findById(project_id).orElse(null);
+       Student student=studentDao.findById(USN).orElse(null);
+       if(project!=null && student!=null)
+       {
+           Set<Project> projectSet=student.getProjects();
+           projectSet.add(project);
+           student.setProjects(projectSet);
+           studentDao.save(student);
+           return HttpStatus.OK;
+       }
+       else
+           return HttpStatus.INTERNAL_SERVER_ERROR;
+    }
+
+
 
 }
