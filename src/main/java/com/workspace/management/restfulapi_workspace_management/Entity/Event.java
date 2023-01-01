@@ -15,7 +15,6 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int event_id;
 
-
     @Column(nullable = false, name = "start_date")
     private Date start_date = new Date();
 
