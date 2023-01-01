@@ -40,6 +40,20 @@ public class UserController {
         return this.eventService.getEvents();
     }
 
+    @GetMapping(path = "/projects-archived", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Project>> getArchivedProjects() {
+        return this.projectService.getArchivedProjects();
+    }
+    @GetMapping(path = "/internships-archived", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Internship>> getArchivedInternships() {
+        return this.internshipService.getArchivedInternships();
+    }
+
+    @GetMapping(path = "/events-archived", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Event>> getArchivedEvents() {
+        return this.eventService.getAchivedEvents();
+    }
+
     @PostMapping(path = "/apply-project", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpStatus> applyProject(@RequestBody Map<String,String> json) {
         return new ResponseEntity<>(projectService.applyProject(json.get("USN"), Integer.parseInt(json.get("project_id"))));

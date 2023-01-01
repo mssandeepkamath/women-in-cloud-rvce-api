@@ -20,4 +20,5 @@ public interface InternshipService {
 
     HttpStatus hireInternship(String USN,int project_id);
 
+    ResponseEntity<List<Internship>> getArchivedInternships();
 }

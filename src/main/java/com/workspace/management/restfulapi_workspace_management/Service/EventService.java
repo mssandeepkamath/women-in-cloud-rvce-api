@@ -19,5 +19,5 @@ public interface EventService {
     HttpStatus applyEvent(String USN,int event_id);
 
 
-
+    ResponseEntity<List<Event>> getAchivedEvents();
 }
