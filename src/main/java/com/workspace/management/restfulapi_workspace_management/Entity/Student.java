@@ -1,9 +1,7 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.util.Set;
 
 @Entity
@@ -42,14 +40,11 @@ public class Student {
             inverseJoinColumns = {@JoinColumn(name = "project_id")})
     private Set<Project> applied_projects;
 
-    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "internship_applied",
             joinColumns = {@JoinColumn(name = "USN")},
             inverseJoinColumns = {@JoinColumn(name = "internship_id")})
     private Set<Internship> applied_internships;
-
-
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "event_applied",
@@ -57,6 +52,17 @@ public class Student {
             inverseJoinColumns = {@JoinColumn(name = "event_id")})
     private Set<Event> applied_events;
 
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//     @JoinColumn(name = "internship_id",nullable = false)
+//     private Internship ongoing_internship;
+//
+//    public Internship getOngoing_internship() {
+//        return ongoing_internship;
+//    }
+//
+//    public void setOngoing_internship(Internship ongoing_internship) {
+//        this.ongoing_internship = ongoing_internship;
+//    }
     public Student() {
         super();
     }

@@ -53,13 +53,15 @@ public class Internship {
     public void setOpening(int opening) {
         this.opening = opening;
     }
-
     @Column(name = "opening",nullable = false)
     private int opening;
-
     @JsonIgnore
     @ManyToMany(mappedBy="applied_internships")
     private Set<Student> applied_students;
+
+//    @JsonIgnore
+//    @OneToMany(mappedBy="ongoing_internship")
+//    private Set<Student> working_students;
     public Internship() {
         super();
     }
