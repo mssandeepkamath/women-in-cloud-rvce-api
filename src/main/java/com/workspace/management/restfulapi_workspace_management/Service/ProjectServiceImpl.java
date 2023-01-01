@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
@@ -35,7 +34,6 @@ public class ProjectServiceImpl implements ProjectService {
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR) ;
         }
     }
-
     @Override
     public List<Student> getProjectAppliedStudent(int project_id) {
         Project project=projectDao.findById(project_id).orElse(null);
@@ -45,10 +43,8 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return null;
     }
-
     @Override
     public HttpStatus addProject(Project project){
-
         try
         {
             projectDao.save(project);
