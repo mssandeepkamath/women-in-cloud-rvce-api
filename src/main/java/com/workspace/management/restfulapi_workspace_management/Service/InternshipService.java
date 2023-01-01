@@ -5,7 +5,6 @@ import com.workspace.management.restfulapi_workspace_management.Entity.Internshi
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import java.util.List;
 
 public interface InternshipService {
