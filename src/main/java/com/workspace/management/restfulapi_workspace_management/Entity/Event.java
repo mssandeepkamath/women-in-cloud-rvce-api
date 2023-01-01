@@ -6,11 +6,9 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
-
 @Entity
 @Table(name = "event")
 public class Event {
-
 
     @Id
     @Column(name = "event_id")
@@ -32,9 +30,34 @@ public class Event {
 
     @Column(nullable = false, name = "type")
     private String type;
+
+    @Column(nullable = false, name = "name")
+    private String name;
+
+    @Column(nullable = false, name = "description")
+    private String description;
+
+    @Column(nullable = true, name = "poster")
+    private String poster;
+
+    public Event(int event_id, Date start_date, Date end_date, String staff_incharge, String location, String type, String name, String description, String poster, Set<Student> applied_students) {
+        this.event_id = event_id;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.staff_incharge = staff_incharge;
+        this.location = location;
+        this.type = type;
+        this.name = name;
+        this.description = description;
+        this.poster = poster;
+        this.applied_students = applied_students;
+    }
+
     @JsonIgnore
     @ManyToMany(mappedBy = "applied_events")
     private Set<Student> applied_students;
+
+
 
     public Set<Student> getApplied_students() {
         return applied_students;
@@ -48,16 +71,30 @@ public class Event {
         super();
     }
 
-    public Event(int event_id, Date start_date, Date end_date, String staff_incharge, String location, String type) {
-        super();
-        this.event_id = event_id;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.staff_incharge = staff_incharge;
-        this.location = location;
-        this.type = type;
+
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
 
     public int getEvent_id() {
         return event_id;

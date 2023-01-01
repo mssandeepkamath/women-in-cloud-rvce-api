@@ -33,9 +33,9 @@ public class InternshipServiceImpl implements InternshipService {
     @Override
     public ResponseEntity<List<Internship>> getInternships() {
         try {
-            return new ResponseEntity<>(internshipDao.findAll(), HttpStatus.OK);
+            return new ResponseEntity<>(internshipDao.getInternshipByOpening(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -81,6 +81,15 @@ public class InternshipServiceImpl implements InternshipService {
             return HttpStatus.OK;
         } else
             return HttpStatus.INTERNAL_SERVER_ERROR;
+    }
+
+    @Override
+    public ResponseEntity<List<Internship>> getArchivedInternships() {
+        try {
+            return new ResponseEntity<>(internshipDao.getArchivedInternship(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

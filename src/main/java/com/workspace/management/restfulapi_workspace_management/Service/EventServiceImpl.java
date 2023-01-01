@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -28,9 +29,9 @@ public class EventServiceImpl implements EventService {
     @Override
     public ResponseEntity<List<Event>> getEvents() {
         try {
-            return new ResponseEntity<>(eventDao.findAll(),HttpStatus.OK) ;
+            return new ResponseEntity<>(eventDao.getActiveEvent(new Date(System.currentTimeMillis())),HttpStatus.OK) ;
         } catch (Exception e) {
-            return new ResponseEntity<>(null,HttpStatus.OK) ;
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR) ;
         }
     }
 
@@ -70,6 +71,15 @@ public class EventServiceImpl implements EventService {
             return HttpStatus.OK;
         } else
             return HttpStatus.INTERNAL_SERVER_ERROR;
+    }
+
+    @Override
+    public ResponseEntity<List<Event>> getAchivedEvents() {
+        try {
+            return new ResponseEntity<>(eventDao.getArchivedEvent(new Date(System.currentTimeMillis())),HttpStatus.OK) ;
+        } catch (Exception e) {
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR) ;
+        }
     }
 
 }

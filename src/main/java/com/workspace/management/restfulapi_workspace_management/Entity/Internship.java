@@ -38,14 +38,24 @@ public class Internship {
     //   String Duration;//derived it is
 
     @Column(nullable = false,name = "mode")
-    String mode;//online or offline
+    private String mode;//online or offline
 
     @Column(nullable = false,name = "location")
-    String location; //applied only if offline
+    private String location; //applied only if offline
 
     @Column(name = "type")
-    String type;
+    private String type;
 
+    public int getOpening() {
+        return opening;
+    }
+
+    public void setOpening(int opening) {
+        this.opening = opening;
+    }
+
+    @Column(name = "opening",nullable = false)
+    private int opening;
 
     @JsonIgnore
     @ManyToMany(mappedBy="applied_internships")
@@ -62,7 +72,7 @@ public class Internship {
         this.applied_students = applied_students;
     }
 
-    public Internship(int internship_id, String company_name, String role_description, String requirements, String manager, Date start_date, Date end_date, String mode, String location, String type) {
+    public Internship(int internship_id, String company_name, String role_description, String requirements, String manager, Date start_date, Date end_date, String mode, String location, String type,int opening) {
        super();
         this.internship_id = internship_id;
         this.company_name = company_name;
@@ -74,6 +84,7 @@ public class Internship {
         this.mode = mode;
         this.location = location;
         this.type = type;
+        this.opening=opening;
     }
 
     public int getInternship_id() {

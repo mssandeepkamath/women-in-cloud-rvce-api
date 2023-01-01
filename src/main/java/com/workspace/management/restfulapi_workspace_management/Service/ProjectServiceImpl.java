@@ -30,9 +30,9 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ResponseEntity<List<Project>> getProjects() {
         try {
-            return new ResponseEntity<>(projectDao.findAll(),HttpStatus.OK) ;
+            return new ResponseEntity<>(projectDao.getProjectByOpening(),HttpStatus.OK) ;
         } catch (Exception e) {
-            return new ResponseEntity<>(null,HttpStatus.OK) ;
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR) ;
         }
     }
 
@@ -86,6 +86,15 @@ public class ProjectServiceImpl implements ProjectService {
         }
         else
             return HttpStatus.INTERNAL_SERVER_ERROR;
+    }
+
+    @Override
+    public ResponseEntity<List<Project>> getArchivedProjects() {
+        try {
+            return new ResponseEntity<>(projectDao.getArchivedProject(),HttpStatus.OK) ;
+        } catch (Exception e) {
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR) ;
+        }
     }
 
 }

@@ -22,5 +22,5 @@ public interface ProjectService {
 
     HttpStatus hireProject(String USN,int project_id);
 
-
+    ResponseEntity<List<Project>> getArchivedProjects();
 }

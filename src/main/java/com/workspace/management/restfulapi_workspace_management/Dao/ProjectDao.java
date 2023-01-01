@@ -10,5 +10,9 @@ import java.util.List;
 
 public interface ProjectDao extends JpaRepository<Project,Integer> {
 // Add queries here using @Query annotations and corresponding functions
+    @Query(value = "SELECT * FROM project p where p.opening>0",nativeQuery = true)
+    public List<Project> getProjectByOpening();
 
+    @Query(value = "SELECT  * FROM project p where p.opening<1",nativeQuery = true)
+    public List<Project> getArchivedProject();
 }
