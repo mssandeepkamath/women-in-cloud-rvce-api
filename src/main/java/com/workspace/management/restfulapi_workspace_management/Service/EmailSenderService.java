@@ -11,7 +11,7 @@ public class EmailSenderService {
 
     public void sendSimpleEmail(String toEmail,
                                 String body,
-                                String subject) {
+                                String subject)  throws Exception{
         SimpleMailMessage message = new SimpleMailMessage();
 
         message.setFrom("noreply.wic.rvce@gmail.com");
