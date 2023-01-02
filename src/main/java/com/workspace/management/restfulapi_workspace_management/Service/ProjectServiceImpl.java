@@ -5,6 +5,8 @@ import com.workspace.management.restfulapi_workspace_management.Dao.ProjectDao;
 import com.workspace.management.restfulapi_workspace_management.Dao.StudentDao;
 import com.workspace.management.restfulapi_workspace_management.Entity.Project;
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
+
+import com.workspace.management.restfulapi_workspace_management.Util.MailSenderThread;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     EmailSenderService emailSenderService;
+
 
     @Override
     public ResponseEntity<List<Project>> getProjects() {
@@ -59,7 +62,8 @@ public class ProjectServiceImpl implements ProjectService {
     public HttpStatus applyProject(String USN, int project_id) {
        Project project=projectDao.findById(project_id).orElse(null);
        Student student=studentDao.findById(USN).orElse(null);
-       if(project!=null && student!=null)
+
+       if(project!=null && student!=null && student.getOn_going_project()==null)
        {
            Set<Project> projectSet=student.getApplied_projects();
            projectSet.add(project);
@@ -68,20 +72,38 @@ public class ProjectServiceImpl implements ProjectService {
            return HttpStatus.OK;
        }
        else
+       {
            return HttpStatus.INTERNAL_SERVER_ERROR;
+       }
+
+
     }
 
     @Override
     public HttpStatus hireProject(String USN, int project_id) {
         Student student=studentDao.findById(USN).orElse(null);
         Project project=projectDao.findById(project_id).orElse(null);
-        if(student!=null && project!=null)
+        try
         {
-            emailSenderService.sendSimpleEmail(student.getEmail_id(),"Hi,\nRegarding your application for "+ project.getCompany_name() + ", we have reviewed your resume and found you as a right candidate for the project.\nThis is your access token for workspace{access_token}\nThanks and regards,\nCOE admin,\nWIC,\nR V College of Engineering, Bengaluru","You are HIRED!");
-            return HttpStatus.OK;
+            if(student!=null && project!=null)
+            {
+                Set<Student> working_student= project.getWorking_students();
+                working_student.add(student);
+                project.setWorking_students(working_student);
+                project.setOpening(project.getOpening()-1);
+                student.setApplied_projects(null);
+                projectDao.save(project);
+                studentDao.save(student);
+                new Thread(new MailSenderThread(emailSenderService,student,project)).start();
+                return HttpStatus.OK;
+            }
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
         }
-        else
-            return HttpStatus.INTERNAL_SERVER_ERROR;
+
+        return HttpStatus.INTERNAL_SERVER_ERROR;
     }
 
     @Override

@@ -54,8 +54,21 @@ public class Project {
         return applied_students;
     }
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="on_going_project",cascade = CascadeType.ALL)
+    private Set<Student> working_students;
+
+
     public void setApplied_students(Set<Student> applied_students) {
         this.applied_students = applied_students;
+    }
+
+    public Set<Student> getWorking_students() {
+        return working_students;
+    }
+
+    public void setWorking_students(Set<Student> working_students) {
+        this.working_students = working_students;
     }
 
     public Project() {

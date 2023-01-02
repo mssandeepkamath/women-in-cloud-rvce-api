@@ -58,10 +58,18 @@ public class Internship {
     @JsonIgnore
     @ManyToMany(mappedBy="applied_internships")
     private Set<Student> applied_students;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="on_going_internship",cascade = CascadeType.ALL)
+    private Set<Student> working_students;
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy="ongoing_internship")
-//    private Set<Student> working_students;
+    public Set<Student> getWorking_students() {
+        return working_students;
+    }
+
+    public void setWorking_students(Set<Student> working_students) {
+        this.working_students = working_students;
+    }
+
     public Internship() {
         super();
     }

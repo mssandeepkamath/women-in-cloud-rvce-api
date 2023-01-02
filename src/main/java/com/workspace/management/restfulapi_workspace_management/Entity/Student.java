@@ -52,17 +52,30 @@ public class Student {
             inverseJoinColumns = {@JoinColumn(name = "event_id")})
     private Set<Event> applied_events;
 
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//     @JoinColumn(name = "internship_id",nullable = false)
-//     private Internship ongoing_internship;
-//
-//    public Internship getOngoing_internship() {
-//        return ongoing_internship;
-//    }
-//
-//    public void setOngoing_internship(Internship ongoing_internship) {
-//        this.ongoing_internship = ongoing_internship;
-//    }
+    @ManyToOne(cascade= CascadeType.ALL)
+    @JoinColumn(name = "internship_id")
+    private Internship on_going_internship;
+
+    @ManyToOne(cascade= CascadeType.ALL)
+    @JoinColumn(name = "project_id")
+    private Project on_going_project;
+
+    public Internship getOn_going_internship() {
+        return on_going_internship;
+    }
+
+    public void setOn_going_internship(Internship on_going_internship) {
+        this.on_going_internship = on_going_internship;
+    }
+
+    public Project getOn_going_project() {
+        return on_going_project;
+    }
+
+    public void setOn_going_project(Project on_going_project) {
+        this.on_going_project = on_going_project;
+    }
+
     public Student() {
         super();
     }

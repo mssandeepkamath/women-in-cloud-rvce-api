@@ -5,13 +5,12 @@ import com.workspace.management.restfulapi_workspace_management.Dao.InternshipDa
 
 import com.workspace.management.restfulapi_workspace_management.Dao.StudentDao;
 import com.workspace.management.restfulapi_workspace_management.Entity.Internship;
-import com.workspace.management.restfulapi_workspace_management.Entity.Project;
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
+import com.workspace.management.restfulapi_workspace_management.Util.MailSenderThread;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -62,7 +61,7 @@ public class InternshipServiceImpl implements InternshipService {
     public HttpStatus applyInternship(String USN, int internship_id) {
         Internship internship = internshipDao.findById(internship_id).orElse(null);
         Student student = studentDao.findById(USN).orElse(null);
-        if (internship != null && student != null) {
+        if (internship != null && student != null && student.getOn_going_internship()==null) {
             Set<Internship> internshipSet = student.getApplied_internships();
             internshipSet.add(internship);
             student.setApplied_internships(internshipSet);
@@ -76,11 +75,26 @@ public class InternshipServiceImpl implements InternshipService {
     public HttpStatus hireInternship(String USN, int internship_id) {
         Student student = studentDao.findById(USN).orElse(null);
         Internship internship = internshipDao.findById(internship_id).orElse(null);
-        if (student != null && internship != null) {
-            emailSenderService.sendSimpleEmail(student.getEmail_id(), "Hi,\nRegarding your application for " + internship.getCompany_name() + ", we have reviewed your resume and found you as a right candidate for the Internship .\nThis is your access token for workspace{access_token}\nThanks and regards,\nCOE admin,\nWIC,\nR V College of Engineering, Bengaluru", "You are HIRED!");
-            return HttpStatus.OK;
-        } else
-            return HttpStatus.INTERNAL_SERVER_ERROR;
+        try {
+
+            if (student != null && internship != null) {
+                Set<Student> working_student= internship.getWorking_students();
+                working_student.add(student);
+                internship.setWorking_students(working_student);
+                internship.setOpening(internship.getOpening()-1);
+                student.setApplied_internships(null);
+                studentDao.save(student);
+                internshipDao.save(internship);
+                new Thread(new MailSenderThread(emailSenderService,student,internship)).start();
+                return HttpStatus.OK;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return HttpStatus.INTERNAL_SERVER_ERROR;
+
     }
 
     @Override
