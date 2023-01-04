@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 import java.util.Map;
 
@@ -58,5 +60,18 @@ public class AdminController {
     @PostMapping(path = "/hire-internship",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpStatus> hireInternship(@RequestBody Map<String,String> json) {
         return new ResponseEntity<>(internshipService.hireInternship(json.get("USN"), Integer.parseInt(json.get("internship_id"))));
+    }
+
+    @PostMapping(path = "/upload-project-document/{project_id}")
+    public ResponseEntity<List<Object>> uploadProjectDocumentToDB(@RequestParam("file") MultipartFile[] files,@PathVariable String project_id) {
+        return projectService.uploadProjectDocument(files,Integer.parseInt(project_id));
+    }
+    @PostMapping(path = "/upload-project-document/{internship_id}")
+    public ResponseEntity<List<Object>> uploadInternshipDocumentToDB(@RequestParam("file") MultipartFile[] files,@PathVariable String internship_id) {
+        return internshipService.uploadInternshipDocument(files,Integer.parseInt(internship_id));
+    }
+    @PostMapping(path = "/upload-project-document/{event_id}")
+    public ResponseEntity<List<Object>> uploadEventDocumentToDB(@RequestParam("file") MultipartFile[] files,@PathVariable String event_id) {
+        return eventService.uploadEventDocument(files,Integer.parseInt(event_id));
     }
 }

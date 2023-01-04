@@ -46,6 +46,7 @@ public class Internship {
     @Column(name = "type")
     private String type;
 
+
     public int getOpening() {
         return opening;
     }
@@ -61,6 +62,18 @@ public class Internship {
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER,mappedBy="on_going_internship",cascade = CascadeType.ALL)
     private Set<Student> working_students;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="internship",cascade = CascadeType.ALL)
+    private Set<Document> documents;
+
+    public Set<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Set<Document> documents) {
+        this.documents = documents;
+    }
 
     public Set<Student> getWorking_students() {
         return working_students;

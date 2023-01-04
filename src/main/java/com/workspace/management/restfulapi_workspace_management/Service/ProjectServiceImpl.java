@@ -1,8 +1,10 @@
 package com.workspace.management.restfulapi_workspace_management.Service;
 
 
+import com.workspace.management.restfulapi_workspace_management.Dao.DocumentDao;
 import com.workspace.management.restfulapi_workspace_management.Dao.ProjectDao;
 import com.workspace.management.restfulapi_workspace_management.Dao.StudentDao;
+import com.workspace.management.restfulapi_workspace_management.Entity.Document;
 import com.workspace.management.restfulapi_workspace_management.Entity.Project;
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
 
@@ -11,8 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +37,10 @@ public class ProjectServiceImpl implements ProjectService {
     private StudentDao studentDao;
 
     @Autowired
-    EmailSenderService emailSenderService;
+    private EmailSenderService emailSenderService;
+
+    @Autowired
+    private DocumentDao documentDao;
 
 
     @Override
@@ -113,6 +127,41 @@ public class ProjectServiceImpl implements ProjectService {
         } catch (Exception e) {
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR) ;
         }
+    }
+    public ResponseEntity uploadToLocalFileSystem(MultipartFile file,int project_id) {
+        Document doc = new Document();
+        Project project=projectDao.findById(project_id).get();
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if(project!=null)
+        {
+            doc.setDocument_name(fileName);
+
+            try {
+                doc.setFile(file.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Set<Document> documentSet=project.getDocuments();
+            documentSet.add(doc);
+            project.setDocuments(documentSet);
+            doc.setProject(project);
+        }
+        documentDao.save(doc);
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/files/download/")
+                .path(fileName)
+                .toUriString();
+        return ResponseEntity.ok(fileDownloadUri);
+    }
+
+    @Override
+    public ResponseEntity<List<Object>> uploadProjectDocument(MultipartFile[] files,int project_id) {
+        List<Object> fileDownloadUrls = new ArrayList<>();
+        Arrays.asList(files)
+                .stream()
+                .forEach(file -> fileDownloadUrls.add(uploadToLocalFileSystem(file,project_id).getBody()));
+        return new ResponseEntity<>(fileDownloadUrls,HttpStatus.OK);
     }
 
 }
