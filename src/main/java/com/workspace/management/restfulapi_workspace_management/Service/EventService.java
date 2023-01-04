@@ -5,6 +5,7 @@ import com.workspace.management.restfulapi_workspace_management.Entity.Project;
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface EventService {
 
 
     ResponseEntity<List<Event>> getAchivedEvents();
+
+    ResponseEntity<List<Object>> uploadEventDocument(MultipartFile[] files, int event_id);
 }

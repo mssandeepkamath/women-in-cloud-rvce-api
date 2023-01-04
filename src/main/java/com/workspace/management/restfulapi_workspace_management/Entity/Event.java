@@ -52,11 +52,21 @@ public class Event {
         this.applied_students = applied_students;
     }
 
+    public Set<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Set<Document> documents) {
+        this.documents = documents;
+    }
+
     @JsonIgnore
     @ManyToMany(mappedBy = "applied_events")
     private Set<Student> applied_students;
 
-
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="event",cascade = CascadeType.ALL)
+    private Set<Document> documents;
 
     public Set<Student> getApplied_students() {
         return applied_students;

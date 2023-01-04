@@ -4,6 +4,8 @@ import com.workspace.management.restfulapi_workspace_management.Entity.Internshi
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public interface InternshipService {
@@ -19,4 +21,7 @@ public interface InternshipService {
     HttpStatus hireInternship(String USN,int project_id);
 
     ResponseEntity<List<Internship>> getArchivedInternships();
+
+    ResponseEntity<List<Object>> uploadInternshipDocument(MultipartFile[] files, int internship_id);
+
 }

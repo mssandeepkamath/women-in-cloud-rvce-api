@@ -46,6 +46,7 @@ public class Project {
     @Column(name = "resources")
     private String resources;
 
+
     @JsonIgnore
     @ManyToMany(mappedBy="applied_projects")
     private Set<Student> applied_students;
@@ -58,6 +59,17 @@ public class Project {
     @OneToMany(fetch = FetchType.EAGER,mappedBy="on_going_project",cascade = CascadeType.ALL)
     private Set<Student> working_students;
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="project",cascade = CascadeType.ALL)
+    private Set<Document> documents;
+
+    public Set<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Set<Document> documents) {
+        this.documents = documents;
+    }
 
     public void setApplied_students(Set<Student> applied_students) {
         this.applied_students = applied_students;

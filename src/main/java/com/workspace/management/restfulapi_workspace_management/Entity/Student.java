@@ -1,7 +1,10 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -56,6 +59,18 @@ public class Student {
     @JoinColumn(name = "internship_id")
     private Internship on_going_internship;
 
+    public Set<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Set<Document> documents) {
+        this.documents = documents;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="student",cascade = CascadeType.ALL)
+    private Set<Document> documents;
+
     @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name = "project_id")
     private Project on_going_project;
@@ -80,16 +95,21 @@ public class Student {
         super();
     }
 
-    public Student(String stu_first_name, String stu_mid_name, String stu_last_name, String batch, String USN, String department, String ph_number, String email_id) {
-        super();
-        this.student_first_name = stu_first_name;
-        this.student_mid_name = stu_mid_name;
-        this.student_last_name = stu_last_name;
+
+    public Student(String student_first_name, String student_mid_name, String student_last_name, String batch, String USN, String department, String phone_number, String email_id, List<String> skill_set, Set<Project> applied_projects, Set<Internship> applied_internships, Set<Event> applied_events, Internship on_going_internship, Project on_going_project) {
+        this.student_first_name = student_first_name;
+        this.student_mid_name = student_mid_name;
+        this.student_last_name = student_last_name;
         this.batch = batch;
         this.USN = USN;
         this.department = department;
-        this.phone_number = ph_number;
+        this.phone_number = phone_number;
         this.email_id = email_id;
+        this.applied_projects = applied_projects;
+        this.applied_internships = applied_internships;
+        this.applied_events = applied_events;
+        this.on_going_internship = on_going_internship;
+        this.on_going_project = on_going_project;
     }
 
     public Set<Project> getApplied_projects() {
@@ -190,7 +210,7 @@ public class Student {
                 ", USN='" + USN + '\'' +
                 ", department='" + department + '\'' +
                 ", phone_number='" + phone_number + '\'' +
-                ", email_id='" + email_id + '\'' +
+                ", email_id='" + email_id +
                 '}';
     }
 }

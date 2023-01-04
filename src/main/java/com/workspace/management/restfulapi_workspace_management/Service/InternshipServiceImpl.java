@@ -1,17 +1,26 @@
 package com.workspace.management.restfulapi_workspace_management.Service;
 
 
+import com.workspace.management.restfulapi_workspace_management.Dao.DocumentDao;
 import com.workspace.management.restfulapi_workspace_management.Dao.InternshipDao;
 
 import com.workspace.management.restfulapi_workspace_management.Dao.StudentDao;
+import com.workspace.management.restfulapi_workspace_management.Entity.Document;
 import com.workspace.management.restfulapi_workspace_management.Entity.Internship;
+import com.workspace.management.restfulapi_workspace_management.Entity.Project;
 import com.workspace.management.restfulapi_workspace_management.Entity.Student;
 import com.workspace.management.restfulapi_workspace_management.Util.MailSenderThread;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -27,7 +36,10 @@ public class InternshipServiceImpl implements InternshipService {
     private StudentDao studentDao;
 
     @Autowired
-    EmailSenderService emailSenderService;
+    private EmailSenderService emailSenderService;
+
+    @Autowired
+    private DocumentDao documentDao;
 
     @Override
     public ResponseEntity<List<Internship>> getInternships() {
@@ -104,6 +116,37 @@ public class InternshipServiceImpl implements InternshipService {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    public ResponseEntity uploadToLocalFileSystem(MultipartFile file,int internship_id) {
+        Document doc = new Document();
+        Internship internship=internshipDao.findById(internship_id).get();
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if(internship!=null) {
+            doc.setDocument_name(fileName);
+
+            try {
+                doc.setFile(file.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Set<Document> documentSet=internship.getDocuments();
+            documentSet.add(doc);
+            internship.setDocuments(documentSet);
+        }
+        documentDao.save(doc);
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/files/download/")
+                .path(fileName)
+                .toUriString();
+        return ResponseEntity.ok(fileDownloadUri);
+    }
+    @Override
+    public ResponseEntity<List<Object>> uploadInternshipDocument(MultipartFile[] files, int internship_id) {
+        List<Object> fileDownloadUrls = new ArrayList<>();
+        Arrays.asList(files)
+                .stream()
+                .forEach(file -> fileDownloadUrls.add(uploadToLocalFileSystem(file,internship_id).getBody()));
+        return new ResponseEntity<>(fileDownloadUrls,HttpStatus.OK);
     }
 
 }
