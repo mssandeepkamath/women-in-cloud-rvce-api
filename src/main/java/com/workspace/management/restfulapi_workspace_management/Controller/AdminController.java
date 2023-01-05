@@ -17,11 +17,15 @@ import java.util.Map;
 public class AdminController {
 
     @Autowired
-    ProjectService projectService;
+   private  ProjectService projectService;
     @Autowired
-    InternshipService internshipService;
+    private InternshipService internshipService;
     @Autowired
-    EventService eventService;
+    private EventService eventService;
+
+    @Autowired
+    private StudentService studentService;
+
 
 
 
@@ -73,5 +77,10 @@ public class AdminController {
     @PostMapping(path = "/upload-project-document/{event_id}")
     public ResponseEntity<List<Object>> uploadEventDocumentToDB(@RequestParam("file") MultipartFile[] files,@PathVariable String event_id) {
         return eventService.uploadEventDocument(files,Integer.parseInt(event_id));
+    }
+
+    @PostMapping(path = "/student",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Student> uploadEventDocumentToDB(@RequestBody Map<String,String> json) {
+        return studentService.studentDetails(json.get("USN"));
     }
 }

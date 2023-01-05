@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -134,7 +135,7 @@ public class ProjectServiceImpl implements ProjectService {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         if(project!=null)
         {
-            doc.setDocument_name(fileName);
+            doc.setDocument_name(new Timestamp(System.currentTimeMillis())+fileName);
 
             try {
                 doc.setFile(file.getBytes());
@@ -150,7 +151,7 @@ public class ProjectServiceImpl implements ProjectService {
         documentDao.save(doc);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/files/download/")
-                .path(fileName)
+                .path(doc.getDocument_name())
                 .toUriString();
         return ResponseEntity.ok(fileDownloadUri);
     }

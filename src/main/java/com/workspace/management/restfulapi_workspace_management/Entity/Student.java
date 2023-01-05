@@ -67,7 +67,6 @@ public class Student {
         this.documents = documents;
     }
 
-    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER,mappedBy="student",cascade = CascadeType.ALL)
     private Set<Document> documents;
 

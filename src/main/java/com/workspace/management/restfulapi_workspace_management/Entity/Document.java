@@ -1,6 +1,7 @@
 package com.workspace.management.restfulapi_workspace_management.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Arrays;
@@ -16,6 +17,7 @@ public class Document {
     @Column(name = "document_name")
     private String document_name;
 
+    @JsonIgnore
     @Column(name = "file")
     @Lob
     private byte[] file;
@@ -32,9 +34,35 @@ public class Document {
     @JoinColumn(name = "event_id")
     private Event event;
 
+    @Column(name = "file_url")
+    private String file_url;
+
+    @JsonIgnore
     @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name = "USN")
     private Student student;
+
+    public String getFile_url() {
+        return file_url;
+    }
+
+    public void setFile_url(String file_url) {
+        this.file_url = file_url;
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "id=" + id +
+                ", document_name='" + document_name + '\'' +
+                ", file=" + Arrays.toString(file) +
+                ", project=" + project +
+                ", internship=" + internship +
+                ", event=" + event +
+                ", file_url='" + file_url + '\'' +
+                ", student=" + student +
+                '}';
+    }
 
     public Student getStudent() {
         return student;
@@ -103,18 +131,6 @@ public class Document {
 
     public void setEvent(Event event) {
         this.event = event;
-    }
-
-    @Override
-    public String toString() {
-        return "Document{" +
-                "id=" + id +
-                ", document_name='" + document_name + '\'' +
-                ", file=" + Arrays.toString(file) +
-                ", project=" + project +
-                ", internship=" + internship +
-                ", event=" + event +
-                '}';
     }
 
 

@@ -13,10 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.util.*;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -42,11 +40,11 @@ public class StudentServiceImpl implements StudentService {
 
     public ResponseEntity uploadToLocalFileSystem(MultipartFile file, String USN) {
         Document doc = new Document();
-        Student student=studentDao.findById(USN).get();
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        Student student=studentDao.findById(USN).orElse(null);
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         if(student!=null)
         {
-            doc.setDocument_name(fileName);
+            doc.setDocument_name(new Timestamp(System.currentTimeMillis()) +fileName);
 
             try {
                 doc.setFile(file.getBytes());
@@ -60,11 +58,13 @@ public class StudentServiceImpl implements StudentService {
             doc.setStudent(student);
 
         }
-        documentDao.save(doc);
+
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/files/download/")
-                .path(fileName)
+                .path(doc.getDocument_name())
                 .toUriString();
+        doc.setFile_url(fileDownloadUri);
+        documentDao.save(doc);
         return ResponseEntity.ok(fileDownloadUri);
 
     }
@@ -75,6 +75,18 @@ public class StudentServiceImpl implements StudentService {
                 .stream()
                 .forEach(file -> fileDownloadUrls.add(uploadToLocalFileSystem(file,USN).getBody()));
         return new ResponseEntity<>(fileDownloadUrls, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Student> studentDetails(String USN) {
+        try
+        {
+            return new ResponseEntity<>(studentDao.getStudentByUSN(USN),HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
