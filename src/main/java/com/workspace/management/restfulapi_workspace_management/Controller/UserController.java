@@ -6,10 +6,8 @@ import com.workspace.management.restfulapi_workspace_management.Service.*;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.*;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -97,12 +95,18 @@ public class UserController {
     @GetMapping("/files/download/{fileName:.+}")
     public ResponseEntity downloadFromDB(@PathVariable String fileName) {
         Document document = documentDao.findByDocName(fileName);
-        System.out.println(document);
 
+        if(document!=null)
+        {
+            ByteArrayResource resource = new ByteArrayResource(document.getFile());
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .contentLength(resource.contentLength())
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            ContentDisposition.inline()
+                                    .filename(fileName).toString()).body(resource);
+        }
+        return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 
-       return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType("application/pdf"))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"")
-                .body(document.getFile());
     }
 }

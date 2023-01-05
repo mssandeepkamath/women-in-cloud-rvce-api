@@ -11,4 +11,6 @@ public interface StudentService {
     HttpStatus studentRegister(Student student);
 
     ResponseEntity<List<Object>> uploadStudentDocument(MultipartFile[] files, String USN);
+
+    ResponseEntity<Student> studentDetails(String USN);
 }

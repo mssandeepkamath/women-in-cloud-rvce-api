@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -93,7 +94,7 @@ public class EventServiceImpl implements EventService {
         Event event=eventDao.findById(event_id).get();
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         if(event!=null) {
-            doc.setDocument_name(fileName);
+            doc.setDocument_name(new Timestamp(System.currentTimeMillis())+fileName);
 
             try {
                 doc.setFile(file.getBytes());
@@ -108,7 +109,7 @@ public class EventServiceImpl implements EventService {
         documentDao.save(doc);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/files/download/")
-                .path(fileName)
+                .path(doc.getDocument_name())
                 .toUriString();
         return ResponseEntity.ok(fileDownloadUri);
     }
