@@ -21,8 +21,6 @@ public class Event {
     @Column(nullable = false, name = "end_date")
     private Date end_date = new Date();
 
-    @Column(nullable = false, name = "staff_incharge")
-    private String staff_incharge;
 
     @Column(nullable = false, name = "location")
     private String location;
@@ -39,11 +37,10 @@ public class Event {
     @Column(nullable = true, name = "poster")
     private String poster;
 
-    public Event(int event_id, Date start_date, Date end_date, String staff_incharge, String location, String type, String name, String description, String poster, Set<Student> applied_students) {
+    public Event(int event_id, Date start_date, Date end_date, String location, String type, String name, String description, String poster, Set<Student> applied_students) {
         this.event_id = event_id;
         this.start_date = start_date;
         this.end_date = end_date;
-        this.staff_incharge = staff_incharge;
         this.location = location;
         this.type = type;
         this.name = name;
@@ -54,6 +51,31 @@ public class Event {
 
     public Set<Document> getDocuments() {
         return documents;
+    }
+
+    @JsonIgnore
+    @ManyToMany(mappedBy="event_organized")
+    private Set<Staff> staff_incharge;
+
+
+    public Set<Staff> getStaff_incharge() {
+        return staff_incharge;
+    }
+
+    public void setStaff_incharge(Set<Staff> staff_incharge) {
+        this.staff_incharge = staff_incharge;
+    }
+
+    @JsonIgnore
+    @ManyToMany(mappedBy="funded_events")
+    private Set<Fund> funds;
+
+    public Set<Fund> getFunds() {
+        return funds;
+    }
+
+    public void setFunds(Set<Fund> funds) {
+        this.funds = funds;
     }
 
     public void setDocuments(Set<Document> documents) {
@@ -127,14 +149,6 @@ public class Event {
 
     public void setEnd_date(Date end_date) {
         this.end_date = end_date;
-    }
-
-    public String getStaff_incharge() {
-        return staff_incharge;
-    }
-
-    public void setStaff_incharge(String staff_incharge) {
-        this.staff_incharge = staff_incharge;
     }
 
     public String getLocation() {
