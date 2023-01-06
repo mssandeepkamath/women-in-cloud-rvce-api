@@ -1,5 +1,6 @@
 package com.workspace.management.restfulapi_workspace_management.Controller;
 
+import com.workspace.management.restfulapi_workspace_management.Dao.FundDao;
 import com.workspace.management.restfulapi_workspace_management.Entity.*;
 import com.workspace.management.restfulapi_workspace_management.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class AdminController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private FundService fundService;
 
 
 
@@ -83,4 +86,18 @@ public class AdminController {
     public ResponseEntity<Student> uploadEventDocumentToDB(@RequestBody Map<String,String> json) {
         return studentService.studentDetails(json.get("USN"));
     }
+
+    @GetMapping(path = "/funds",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Fund>> getFunds()
+    {
+        return  this.fundService.getFunds();
+    }
+
+    @PostMapping(path = "/add-fund", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HttpStatus> addFund(@RequestBody Fund fund) {
+        return new ResponseEntity<>(this.fundService.addFund(fund));
+    }
+
+
+
 }

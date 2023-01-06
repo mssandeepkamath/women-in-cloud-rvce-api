@@ -51,6 +51,18 @@ public class Project {
     @ManyToMany(mappedBy="applied_projects")
     private Set<Student> applied_students;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy="guided_projects")
+    private Set<Staff> staff_incharge;
+
+    public Set<Staff> getStaff_incharge() {
+        return staff_incharge;
+    }
+
+    public void setStaff_incharge(Set<Staff> staff_incharge) {
+        this.staff_incharge = staff_incharge;
+    }
+
     public Set<Student> getApplied_students() {
         return applied_students;
     }
@@ -69,6 +81,18 @@ public class Project {
 
     public void setDocuments(Set<Document> documents) {
         this.documents = documents;
+    }
+
+    @JsonIgnore
+    @ManyToMany(mappedBy="funded_projects")
+    private Set<Fund> funds;
+
+    public Set<Fund> getFunds() {
+        return funds;
+    }
+
+    public void setFunds(Set<Fund> funds) {
+        this.funds = funds;
     }
 
     public void setApplied_students(Set<Student> applied_students) {

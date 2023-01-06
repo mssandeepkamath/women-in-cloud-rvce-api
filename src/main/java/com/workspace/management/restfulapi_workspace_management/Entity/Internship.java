@@ -59,6 +59,10 @@ public class Internship {
     @JsonIgnore
     @ManyToMany(mappedBy="applied_internships")
     private Set<Student> applied_students;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy="guided_internships")
+    private Set<Staff> staff_incharge;
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER,mappedBy="on_going_internship",cascade = CascadeType.ALL)
     private Set<Student> working_students;
@@ -73,6 +77,18 @@ public class Internship {
 
     public void setDocuments(Set<Document> documents) {
         this.documents = documents;
+    }
+
+    @JsonIgnore
+    @ManyToMany(mappedBy="funded_internships")
+    private Set<Fund> funds;
+
+    public Set<Fund> getFunds() {
+        return funds;
+    }
+
+    public void setFunds(Set<Fund> funds) {
+        this.funds = funds;
     }
 
     public Set<Student> getWorking_students() {

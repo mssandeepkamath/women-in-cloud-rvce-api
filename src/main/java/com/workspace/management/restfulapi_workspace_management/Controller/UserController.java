@@ -3,17 +3,12 @@ package com.workspace.management.restfulapi_workspace_management.Controller;
 import com.workspace.management.restfulapi_workspace_management.Dao.DocumentDao;
 import com.workspace.management.restfulapi_workspace_management.Entity.*;
 import com.workspace.management.restfulapi_workspace_management.Service.*;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -92,19 +87,17 @@ public class UserController {
         return studentService.uploadStudentDocument(file,usn);
     }
 
+
     @GetMapping("/files/download/{fileName:.+}")
     public ResponseEntity downloadFromDB(@PathVariable String fileName) {
         Document document = documentDao.findByDocName(fileName);
-
         if(document!=null)
         {
-            ByteArrayResource resource = new ByteArrayResource(document.getFile());
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_PDF)
-                    .contentLength(resource.contentLength())
                     .header(HttpHeaders.CONTENT_DISPOSITION,
                             ContentDisposition.inline()
-                                    .filename(fileName).toString()).body(resource);
+                                    .filename(fileName).toString()).body(document.getFile());
         }
         return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 
