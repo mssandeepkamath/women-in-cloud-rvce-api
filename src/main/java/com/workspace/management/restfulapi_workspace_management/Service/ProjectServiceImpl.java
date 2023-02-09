@@ -107,6 +107,7 @@ public class ProjectServiceImpl implements ProjectService {
                 project.setWorking_students(working_student);
                 project.setOpening(project.getOpening()-1);
                 student.setApplied_projects(null);
+                student.setOn_going_project(project);
                 projectDao.save(project);
                 studentDao.save(student);
                 new Thread(new MailSenderThread(emailSenderService,student,project)).start();

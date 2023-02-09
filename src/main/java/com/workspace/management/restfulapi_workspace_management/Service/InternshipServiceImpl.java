@@ -96,6 +96,7 @@ public class InternshipServiceImpl implements InternshipService {
                 internship.setWorking_students(working_student);
                 internship.setOpening(internship.getOpening()-1);
                 student.setApplied_internships(null);
+                student.setOn_going_internship(internship);
                 studentDao.save(student);
                 internshipDao.save(internship);
                 new Thread(new MailSenderThread(emailSenderService,student,internship)).start();

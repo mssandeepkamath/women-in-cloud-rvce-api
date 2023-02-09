@@ -55,6 +55,7 @@ public class Student {
             inverseJoinColumns = {@JoinColumn(name = "event_id")})
     private Set<Event> applied_events;
 
+
     @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name = "internship_id")
     private Internship on_going_internship;
