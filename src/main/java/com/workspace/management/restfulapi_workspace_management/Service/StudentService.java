@@ -13,4 +13,7 @@ public interface StudentService {
     ResponseEntity<List<Object>> uploadStudentDocument(MultipartFile[] files, String USN);
 
     ResponseEntity<Student> studentDetails(String USN);
+
+    List<Student> getRegisteredStudent();
+
 }

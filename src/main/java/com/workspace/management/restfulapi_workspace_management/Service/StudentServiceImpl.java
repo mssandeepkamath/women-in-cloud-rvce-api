@@ -89,4 +89,10 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
+    @Override
+    public List<Student> getRegisteredStudent() {
+        return studentDao.findAll();
+    }
+
+
 }
