@@ -15,4 +15,7 @@ public interface ProjectDao extends JpaRepository<Project,Integer> {
 
     @Query(value = "SELECT  * FROM project p where p.opening<1",nativeQuery = true)
     public List<Project> getArchivedProject();
+
+    @Query(value = "select student_first_name,student_last_name,s.USN,email_id,phone_number,department,batch,student_mid_name from project_applied p,student s where s.USN=p.USN",nativeQuery = true)
+    public List<Student> allAppliedStudent();
 }

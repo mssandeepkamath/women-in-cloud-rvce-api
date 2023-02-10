@@ -23,4 +23,6 @@ public interface EventService {
     ResponseEntity<List<Event>> getAchivedEvents();
 
     ResponseEntity<List<Object>> uploadEventDocument(MultipartFile[] files, int event_id);
+
+    public List<Student> allAppliedEventStudent();
 }

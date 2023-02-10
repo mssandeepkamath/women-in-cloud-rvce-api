@@ -97,7 +97,26 @@ public class AdminController {
     public ResponseEntity<HttpStatus> addFund(@RequestBody Fund fund) {
         return new ResponseEntity<>(this.fundService.addFund(fund));
     }
+    @GetMapping(path = "/students",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> getRegisteredStudents() {
+        return new ResponseEntity<>(studentService.getRegisteredStudent(),HttpStatus.OK);
+    }
 
+    @GetMapping(path = "/all-project-applied-students",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> allProjectApplied() {
+        return new ResponseEntity<>(projectService.allAppliedStudent(),HttpStatus.OK);
+    }
+
+
+    @GetMapping(path = "/all-internship-applied-students",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> allInternshipApplied() {
+        return new ResponseEntity<>(internshipService.allAppliedInternsipStudent(),HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/all-event-applied-students",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Student>> allEventApplied() {
+        return new ResponseEntity<>(eventService.allAppliedEventStudent(),HttpStatus.OK);
+    }
 
 
 }

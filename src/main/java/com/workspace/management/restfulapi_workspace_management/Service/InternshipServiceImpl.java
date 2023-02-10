@@ -151,4 +151,9 @@ public class InternshipServiceImpl implements InternshipService {
         return new ResponseEntity<>(fileDownloadUrls,HttpStatus.OK);
     }
 
+    @Override
+    public List<Student> allAppliedInternsipStudent() {
+        return internshipDao.allAppliedStudent();
+    }
+
 }

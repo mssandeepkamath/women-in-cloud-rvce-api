@@ -24,4 +24,6 @@ public interface InternshipService {
 
     ResponseEntity<List<Object>> uploadInternshipDocument(MultipartFile[] files, int internship_id);
 
+    public List<Student> allAppliedInternsipStudent();
+
 }

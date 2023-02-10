@@ -27,4 +27,6 @@ public interface ProjectService {
 
     ResponseEntity<List<Object>> uploadProjectDocument(MultipartFile[] files,int project_id);
 
+    List<Student> allAppliedStudent();
+
 }

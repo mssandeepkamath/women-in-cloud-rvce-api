@@ -122,4 +122,9 @@ public class EventServiceImpl implements EventService {
         return new ResponseEntity<>(fileDownloadUrls,HttpStatus.OK);
     }
 
+    @Override
+    public List<Student> allAppliedEventStudent() {
+        return eventDao.allAppliedStudent();
+    }
+
 }
