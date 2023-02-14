@@ -16,4 +16,6 @@ public interface StudentService {
 
     List<Student> getRegisteredStudent();
 
+    ResponseEntity<String> getUsnByEmail(String email);
+
 }

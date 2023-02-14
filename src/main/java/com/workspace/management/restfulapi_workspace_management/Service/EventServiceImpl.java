@@ -32,7 +32,6 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private DocumentDao documentDao;
 
-
     @Override
     public ResponseEntity<List<Event>> getEvents() {
         try {
