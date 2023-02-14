@@ -102,7 +102,7 @@ public class UserController {
         return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
-    @GetMapping(path = "/event-applied-students/{email_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/usn/{email_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getUsnByEmail(@PathVariable String email_id) {
         return studentService.getUsnByEmail(email_id);
     }
