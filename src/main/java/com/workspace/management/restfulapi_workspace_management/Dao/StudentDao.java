@@ -11,4 +11,8 @@ public interface StudentDao extends JpaRepository<Student,String> {
     @Query(value = "SELECT * FROM student s WHERE s.USN = :USN",nativeQuery = true)
     public  Student getStudentByUSN(@Param("USN") String USN);
 
+    @Query(value = "SELECT USN FROM student s WHERE s.email_id = :email_id",nativeQuery = true)
+    public String getUSN(@Param("email_id") String email_id);
+
+
 }
