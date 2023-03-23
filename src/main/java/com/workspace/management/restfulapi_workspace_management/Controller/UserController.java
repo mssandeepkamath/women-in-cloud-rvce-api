@@ -3,6 +3,7 @@ package com.workspace.management.restfulapi_workspace_management.Controller;
 import com.workspace.management.restfulapi_workspace_management.Dao.DocumentDao;
 import com.workspace.management.restfulapi_workspace_management.Entity.*;
 import com.workspace.management.restfulapi_workspace_management.Service.*;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -103,8 +104,10 @@ public class UserController {
 
     }
     @GetMapping(path = "/usn/{email_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getUsnByEmail(@PathVariable String email_id) {
-        return studentService.getUsnByEmail(email_id);
+    public ResponseEntity<Object> getUsnByEmail(@PathVariable String email_id) {
+        JSONObject response = new JSONObject();
+        response.put("USN",studentService.getUsnByEmail(email_id).toString());
+        return new ResponseEntity<>(response.toMap(),HttpStatus.OK);
     }
 
 }
