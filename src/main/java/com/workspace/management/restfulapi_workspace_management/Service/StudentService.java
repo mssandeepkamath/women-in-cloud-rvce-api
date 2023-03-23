@@ -15,7 +15,6 @@ public interface StudentService {
     ResponseEntity<Student> studentDetails(String USN);
 
     List<Student> getRegisteredStudent();
-
-    ResponseEntity<String> getUsnByEmail(String email);
+    String getUsnByEmail(String email);
 
 }

@@ -106,7 +106,7 @@ public class UserController {
     @GetMapping(path = "/usn/{email_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getUsnByEmail(@PathVariable String email_id) {
         JSONObject response = new JSONObject();
-        response.put("USN",studentService.getUsnByEmail(email_id).toString());
+        response.put("USN",studentService.getUsnByEmail(email_id)));
         return new ResponseEntity<>(response.toMap(),HttpStatus.OK);
     }
 

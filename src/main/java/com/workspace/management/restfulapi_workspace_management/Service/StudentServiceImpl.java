@@ -95,16 +95,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ResponseEntity<String> getUsnByEmail(String email) {
+    public String getUsnByEmail(String email) {
       try{
-          return new ResponseEntity<>(studentDao.getUSN(email),HttpStatus.OK);
+          return studentDao.getUSN(email);
       }
       catch(Exception e)
       {
           System.out.println(e.getMessage());
       }
-        return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        return null;
     }
-
 
 }
