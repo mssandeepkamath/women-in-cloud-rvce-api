@@ -32,17 +32,17 @@ public class AdminController {
 
 
 
-    @GetMapping(path = "/project-applied-students/{project_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/project-applied-students/{project_id}/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Student>> getProjectAppliedStudent(@PathVariable String project_id) {
         return new ResponseEntity<>(this.projectService.getProjectAppliedStudent(Integer.parseInt(project_id)), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/internship-applied-students/{internship_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/internship-applied-students/{internship_id}/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Student>> getInternshipAppliedStudent(@PathVariable String internship_id) {
         return new ResponseEntity<>(this.internshipService.getInternshipAppliedStudent(Integer.parseInt(internship_id)), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/event-applied-students/{event_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/event-applied-students/{event_id}/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Student>> getEventAppliedStudent(@PathVariable String event_id) {
         return new ResponseEntity<>(this.eventService.getEventAppliedStudent(Integer.parseInt(event_id)), HttpStatus.OK);
     }
