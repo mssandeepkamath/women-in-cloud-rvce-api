@@ -12,7 +12,7 @@ import java.util.Set;
 public class Staff {
 
     @Id
-    @Column(name = "SID")
+    @Column(name = "SID",nullable = false)
     private  String SID;
 
     @Column(name = "department")
@@ -44,7 +44,6 @@ public class Staff {
             joinColumns = {@JoinColumn(name = "internship_id")},
             inverseJoinColumns = {@JoinColumn(name = "SID")})
     private Set<Internship> guided_internships;
-
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "event_organized",

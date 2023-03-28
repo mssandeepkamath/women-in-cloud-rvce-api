@@ -30,6 +30,9 @@ public class AdminController {
     @Autowired
     private FundService fundService;
 
+    @Autowired
+    private StaffService staffService;
+
 
 
     @GetMapping(path = "/project-applied-students/{project_id}/", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -117,6 +120,14 @@ public class AdminController {
     public ResponseEntity<List<Student>> allEventApplied() {
         return new ResponseEntity<>(eventService.allAppliedEventStudent(),HttpStatus.OK);
     }
+    @PostMapping(path = "/register-staff", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Object registerStaff(@RequestBody Staff staff) {
+        return  staffService.addStaff(staff);
+    }
 
+    @GetMapping(path = "/get-staff",produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Staff> getStaffList() {
+        return staffService.getAllStaff();
+    }
 
 }

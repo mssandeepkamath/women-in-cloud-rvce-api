@@ -79,7 +79,7 @@ public class UserController {
         return new ResponseEntity<>(this.studentChapterService.getStudentChapter(), HttpStatus.OK);
     }
     @PostMapping(path = "/register-student", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> applyEvent(@RequestBody Student student) {
+    public ResponseEntity<HttpStatus> registerStudent(@RequestBody Student student) {
         return new ResponseEntity<>(studentService.studentRegister(student));
     }
 
