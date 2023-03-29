@@ -10,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 @RestController
@@ -128,6 +130,41 @@ public class AdminController {
     @GetMapping(path = "/get-staff",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Staff> getStaffList() {
         return staffService.getAllStaff();
+    }
+
+    @GetMapping(path = "/studentsCSV",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StudentCSV>> getCSVContent() {
+        List<StudentCSV> result = new ArrayList<>();
+        List<Student> students = studentService.getRegisteredStudent();
+        for(Student s : students)
+        {
+          StudentCSV scv = new StudentCSV(s.getStudent_first_name(),s.getStudent_mid_name(),s.getStudent_last_name(),s.getBatch(),s.getUSN(),s.getDepartment(),s.getPhone_number(),s.getEmail_id());
+            Set<Project> p = s.getApplied_projects();
+            Set<Internship> i = s.getApplied_internships();
+            Set<Event> e = s.getApplied_events();
+            String applied_p = "";
+            for(Project pp : p ){
+              applied_p.concat("," + pp.getCompany_name());
+            }
+            scv.setApplied_project_company_name(applied_p);
+            String applied_i = "";
+            for(Internship ii : i ){
+                applied_i.concat("," + ii.getCompany_name());
+            }
+            scv.setApplied_project_company_name(applied_i);
+            Project onp = s.getOn_going_project();
+            if(onp!=null)
+            scv.setOn_going_project_company_name(onp.getCompany_name());
+            else scv.setOn_going_project_company_name("null");
+
+            Internship oni = s.getOn_going_internship();
+            if(oni!=null)
+            scv.setOn_going_internship_company_name(oni.getCompany_name());
+            else  scv.setOn_going_internship_company_name("null");
+
+            result.add(scv);
+        }
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
 }
