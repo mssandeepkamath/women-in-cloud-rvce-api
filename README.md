@@ -1,75 +1,93 @@
-## Women In Cloud RVCE API (UNOFFICIAL):
+# Women In Cloud RVCE API (UNOFFICIAL)
 
-<a href="https://codeclimate.com/github/mssandeepkamath/women-in-cloud-rvce-api/maintainability"><img src="https://api.codeclimate.com/v1/badges/a5688e693a48ff0953ca/maintainability" /></a>
-<a href="https://codeclimate.com/github/mssandeepkamath/women-in-cloud-rvce-api/test_coverage"><img src="https://api.codeclimate.com/v1/badges/a5688e693a48ff0953ca/test_coverage" /></a>
+[![Maintainability](https://api.codeclimate.com/v1/badges/a5688e693a48ff0953ca/maintainability)](https://codeclimate.com/github/mssandeepkamath/women-in-cloud-rvce-api/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a5688e693a48ff0953ca/test_coverage)](https://codeclimate.com/github/mssandeepkamath/women-in-cloud-rvce-api/test_coverage)
 
- WOMEN IN CLOUD RVCE ANDROID IS LIVE ON PLAY STORE:
- 
-  ![Explore Women In Could](https://user-images.githubusercontent.com/90695071/229217757-4a582538-3619-4a4a-9970-b0537a488e50.png)
- 
- > https://play.google.com/store/apps/details?id=com.sandeep.womenincloudrvce 
- 
-### Android repository:
+Unofficial API for Women In Cloud RVCE Android App
 
-> https://github.com/mssandeepkamath/women-in-cloud-rvce-android
- 
-### base_url:
-
-> https://...
-
-### end_points:
-
-![Screenshot 2023-03-30 191611](https://user-images.githubusercontent.com/90695071/229211158-47cecd26-1fbc-41c5-9dfc-beadcaca9af6.jpg)
-![Screenshot 2023-03-30 191946](https://user-images.githubusercontent.com/90695071/229211180-d214f235-70f2-49e2-ad77-015b1811be08.jpg)
-       
-### Java class diagram:
-
-![image](https://user-images.githubusercontent.com/90695071/232433709-a390d603-3a38-401e-9adb-9799d075d41c.png)
-
-### Spring model dependency:
-
-![image](https://user-images.githubusercontent.com/90695071/232434107-1a720fa8-e055-4b83-99f1-8bfc1b52f798.png)
+![Architecture](https://user-images.githubusercontent.com/90695071/229217757-4a582538-3619-4a4a-9970-b0537a488e50.png)
 
 
-### environment_variable:
+## Table of Contents
 
-> ${sql_user_name}
+- [About](#about)
+- [Android App](#android-app)
+- [API Documentation](#api-documentation)
+- [Environment Variables](#environment-variables)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-> ${sql_password}
+## About
 
-> ${google_password}
+Women In Cloud RVCE API provides an unofficial backend service for the Women In Cloud RVCE Android App. It offers various endpoints to manage projects, internships, events, student details, staff registration, and more.
 
-> ${google_user_name}
+## Android App
 
-## Contribute :
+The Android app is available on the Play Store. Explore it [here](https://play.google.com/store/apps/details?id=com.sandeep.womenincloudrvce).
 
-1. Fork this repository
+Repository: [women-in-cloud-rvce-android](https://github.com/mssandeepkamath/women-in-cloud-rvce-android)
 
-2. Clone it into your local using
+## API Documentation
 
-       git clone 'your_cloned_https_url'
-       
-3. Add remote using 
+### Base URL
 
-       git remote add upstream https://github.com/mssandeepkamath/women-in-cloud-rvce-api.git
-       git remote add origin your_cloned_repo_link
-         
-4. Create a new branch using
+The base URL for API endpoints is `https://...`.
 
-        git branch name/dev ; git checkout name/dev
-           
-5. Contribute!
+### Endpoints
 
-6. Stage and commit changes using 
+- `/project-applied-students/{project_id}/`: Get students who applied for a project.
+- `/internship-applied-students/{internship_id}/`: Get students who applied for an internship.
+- `/event-applied-students/{event_id}/`: Get students who applied for an event.
+- `/add-project`: Add a new project.
+- `/add-internship`: Add a new internship.
+- `/add-event`: Add a new event.
+- `/hire-project`: Hire a student for a project.
+- `/hire-internship`: Hire a student for an internship.
+- `/upload-project-document/{project_id}`: Upload project documents.
+- `/upload-internship-document/{internship_id}`: Upload internship documents.
+- `/upload-event-document/{event_id}`: Upload event documents.
+- `/student`: Get student details by USN.
+- `/funds`: Get funds information.
+- `/add-fund`: Add a new fund.
+- `/students`: Get registered students.
+- `/all-project-applied-students`: Get all students who applied for projects.
+- `/all-internship-applied-students`: Get all students who applied for internships.
+- `/all-event-applied-students`: Get all students who applied for events.
+- `/register-staff`: Register a staff member.
+- `/get-staff`: Get a list of staff members.
+- `/studentsCSV`: Get student details in CSV format.
 
-       git add . ; git commit -m "your updates"
-           
-7. Create pull request in Github for merging the update into mssandeepkamath/women-in-cloud-rvce-api main(upstream).
-     
-8. Fetching latest changes from original repository.
+Refer to the [Java class diagram](https://user-images.githubusercontent.com/90695071/232433709-a390d603-3a38-401e-9adb-9799d075d41c.png) and [Spring model dependency diagram](https://user-images.githubusercontent.com/90695071/232434107-1a720fa8-e055-4b83-99f1-8bfc1b52f798.png) for an overview of the application's structure.
 
-       git pull upstream master
-       
+## Environment Variables
 
+Ensure to set the following environment variables:
 
+- `sql_user_name`
+- `sql_password`
+- `google_password`
+- `google_user_name`
 
+## Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork this repository.
+2. Clone the forked repository locally.
+3. Create a new branch for your feature/fix.
+4. Make your changes and commit them.
+5. Push the changes to your fork.
+6. Create a pull request in the original repository.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Contact
+
+For questions or feedback, feel free to [contact us](mailto:your.email@example.com).
+
+---
+
+**Disclaimer:** This project is not affiliated with any official Women In Cloud RVCE platforms. It's developed independently for educational and community purposes.
