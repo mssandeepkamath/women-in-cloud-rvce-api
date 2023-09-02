@@ -82,11 +82,11 @@ Contributions are welcome! To contribute:
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](License).
 
 ## Contact
 
-For questions or feedback, feel free to [contact us](mailto:your.email@example.com).
+For questions or feedback, feel free to [contact us](mailto:msandeepcip@gmail.com).
 
 ---
 
