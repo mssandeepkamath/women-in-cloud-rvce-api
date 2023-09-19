@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/a5688e693a48ff0953ca/maintainability)](https://codeclimate.com/github/mssandeepkamath/women-in-cloud-rvce-api/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a5688e693a48ff0953ca/test_coverage)](https://codeclimate.com/github/mssandeepkamath/women-in-cloud-rvce-api/test_coverage)
 
-Unofficial API for Women In Cloud RVCE Android App
+Unofficial API for Women In Cloud RVCE Center of Excellence Management.
 
 ![Architecture](https://user-images.githubusercontent.com/90695071/229217757-4a582538-3619-4a4a-9970-b0537a488e50.png)
 
