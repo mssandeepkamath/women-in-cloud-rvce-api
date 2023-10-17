@@ -13,6 +13,7 @@ Unofficial API for Women In Cloud RVCE Center of Excellence Management.
 
 - [About](#about)
 - [Android App](#android-app)
+- [Web App](#web-app)
 - [API Documentation](#api-documentation)
 - [Environment Variables](#environment-variables)
 - [Contributing](#contributing)
@@ -21,13 +22,17 @@ Unofficial API for Women In Cloud RVCE Center of Excellence Management.
 
 ## About
 
-Women In Cloud RVCE API provides an unofficial backend service for the Women In Cloud RVCE Android App. It offers various endpoints to manage projects, internships, events, student details, staff registration, and more.
+Women In Cloud RVCE API provides an unofficial backend service for the Women In Cloud RVCE Android & Web App. It offers various endpoints to manage projects, internships, events, student details, staff registration, and more.
 
 ## Android App
 
 The Android app is available on the Play Store. Explore it [here](https://play.google.com/store/apps/details?id=com.sandeep.womenincloudrvce).
 
 Repository: [women-in-cloud-rvce-android](https://github.com/mssandeepkamath/women-in-cloud-rvce-android)
+
+## Web App
+
+Repository: [women-in-cloud-rvce-web](https://github.com/mssandeepkamath/women-in-cloud-rvce-web)
 
 ## API Documentation
 
